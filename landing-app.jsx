@@ -98,7 +98,7 @@ function Nav() {
           ))}
         </nav>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div className="cj-navcta"><Button variant="primary" size="sm" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon size="1.15em" />}>Escribinos</Button></div>
+          <div className="cj-navcta"><Button className="cj-header-cta" variant="primary" size="sm" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon size="1.15em" />}>Escribinos</Button></div>
           <button className="cj-burger" onClick={() => setOpen(!open)} aria-label="Menú" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'none', border: 0, cursor: 'pointer', padding: 6 }}>
             <span style={{ width: 22, height: 1, background: 'var(--cj-ink)' }} /><span style={{ width: 22, height: 1, background: 'var(--cj-ink)' }} /><span style={{ width: 22, height: 1, background: 'var(--cj-ink)' }} />
           </button>
@@ -432,7 +432,7 @@ function Advisory() {
             </p>
             <div style={{ display: 'flex', gap: 16, marginTop: '2.2rem', flexWrap: 'wrap' }}>
               <Button variant="accent" size="lg" href={FORM_URL} target="_blank" rel="noopener" icon={ARROW} iconRight>Completar formulario</Button>
-              <Button variant="ghost" size="lg" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon size={18} />} style={{ color: 'var(--cj-paper)', boxShadow: 'inset 0 -1px 0 rgba(243,239,230,0.4)' }}>Escribinos</Button>
+              <Button className="cj-advisory-escribinos" variant="secondary" size="lg" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon size={18} />} style={{ color: 'var(--cj-paper)', borderColor: 'rgba(243,239,230,0.45)' }}>Escribinos</Button>
             </div>
             <div style={{ marginTop: '2.6rem', display: 'flex', gap: 40, flexWrap: 'wrap' }}>
               {[['Estudio', ADDRESS], ['Teléfono', PHONE], ['Horarios', HOURS], ['Instagram', IG]].map(([l, v]) => (
