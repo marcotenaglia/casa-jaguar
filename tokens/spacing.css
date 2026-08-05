@@ -1,0 +1,40 @@
+/* Casa Jaguar — Spacing, radius, layout, motion
+   Airy editorial rhythm on an 8px base. Minimal radii (near-square), generous section gaps. */
+:root {
+  --cj-space-1: 0.25rem;   /* 4 */
+  --cj-space-2: 0.5rem;    /* 8 */
+  --cj-space-3: 0.75rem;   /* 12 */
+  --cj-space-4: 1rem;      /* 16 */
+  --cj-space-5: 1.5rem;    /* 24 */
+  --cj-space-6: 2rem;      /* 32 */
+  --cj-space-7: 3rem;      /* 48 */
+  --cj-space-8: 4rem;      /* 64 */
+  --cj-space-9: 6rem;      /* 96 */
+  --cj-space-10: 8rem;     /* 128 */
+  --cj-space-11: 11rem;    /* 176 — big editorial section breathing */
+
+  /* layout */
+  --cj-max-w: 1320px;      /* outer container */
+  --cj-max-w-text: 640px;  /* comfortable measure */
+  --cj-gutter: clamp(1.25rem, 5vw, 4.5rem); /* @kind spacing */
+  --cj-section-y: clamp(4.5rem, 11vw, 11rem); /* @kind spacing */
+
+  /* radius — restrained, editorial */
+  --cj-radius-sm: 2px;
+  --cj-radius: 3px;
+  --cj-radius-pill: 999px;
+
+  /* borders */
+  --cj-border-hair: 1px;
+
+  /* elevation — barely-there; the system prefers hairlines to shadows */
+  --cj-shadow-none: none;
+  --cj-shadow-soft: 0 1px 2px rgba(43, 54, 82, 0.05), 0 8px 24px rgba(43, 54, 82, 0.06);
+  --cj-shadow-lift: 0 2px 4px rgba(43, 54, 82, 0.06), 0 18px 44px rgba(43, 54, 82, 0.10);
+
+  /* motion — quiet, no bounce */
+  --cj-ease: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --cj-dur-fast: 160ms; /* @kind other */
+  --cj-dur: 320ms; /* @kind other */
+  --cj-dur-slow: 640ms; /* @kind other */
+}

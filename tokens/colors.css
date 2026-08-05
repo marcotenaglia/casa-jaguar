@@ -1,0 +1,59 @@
+/* Casa Jaguar — Color
+   Warm, editorial, sober. White-first with a warm cream companion surface,
+   a warm charcoal ink, a warm-grey neutral scale, and two restrained earth
+   accents (clay + olive) drawn from the studio's photography. No gradients. */
+:root {
+  /* ——— Brand core ——— */
+  --cj-ink: #2b2521;          /* warm charcoal ink — primary dark, text & mark */
+  --cj-ink-deep: #1d1815;     /* pressed / high-emphasis */
+  --cj-ink-soft: #5c534a;     /* secondary ink — warm grey-brown */
+
+  /* Brand red — the cursive logotipo & the "destacadas" highlight covers.
+     A saturated brick/oxblood; the studio's signature accent on cream. */
+  --cj-brick: #a02a20;
+  --cj-brick-deep: #822018;
+  --cj-brick-soft: #c25046;
+
+  /* ——— Paper & white ——— */
+  --cj-white: #ffffff;        /* primary background */
+  --cj-paper: #f3efe6;        /* warm cream companion surface */
+  --cj-paper-deep: #e9e2d5;   /* cream, one step down */
+
+  /* ——— Warm neutral scale (greige) ——— */
+  --cj-stone-50:  #faf8f4;
+  --cj-stone-100: #f2efe8;
+  --cj-stone-200: #e6e1d6;
+  --cj-stone-300: #d3ccbd;
+  --cj-stone-400: #b3ab99;
+  --cj-stone-500: #8c8574;
+  --cj-stone-600: #6c6656;
+  --cj-stone-700: #4d4838;
+
+  /* ——— Earth accents (drawn from the photography — use sparingly) ——— */
+  --cj-clay: #a9704f;         /* terracotta / warm wood */
+  --cj-clay-soft: #c69277;
+  --cj-olive: #7c7d5f;        /* muted sage-olive */
+  --cj-olive-soft: #9b9c80;
+
+  /* ——— Semantic aliases ——— */
+  --cj-bg: var(--cj-white);
+  --cj-bg-alt: var(--cj-paper);
+  --cj-surface: var(--cj-white);
+  --cj-surface-sunken: var(--cj-stone-100);
+
+  --cj-text: var(--cj-ink);
+  --cj-text-muted: var(--cj-stone-600);
+  --cj-text-subtle: var(--cj-stone-500);
+  --cj-text-inverse: var(--cj-paper);
+
+  --cj-line: var(--cj-stone-200);      /* hairline dividers */
+  --cj-line-strong: var(--cj-stone-300);
+  --cj-line-ink: var(--cj-ink);
+
+  --cj-accent: var(--cj-brick);      /* signature brand red */
+  --cj-accent-earth: var(--cj-clay); /* warm wood tone */
+  --cj-accent-alt: var(--cj-olive);
+
+  /* interactive */
+  --cj-focus: var(--cj-clay);
+}

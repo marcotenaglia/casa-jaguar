@@ -1,0 +1,7 @@
+/* Casa Jaguar — Webfonts
+   BRAND TYPEFACE: Roboto (Google Fonts).
+   Per the client's updated direction, the corporate typeface is ROBOTO, superseding
+   the manual's Creato spec. The cursive brand LOGOTIPO is its own artwork
+   (assets/brand/logotipo*.svg, rendered by the Wordmark component) and does not
+   depend on this family. Weights used: 300 / 400 / 500 / 700 (+ italics). */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap');

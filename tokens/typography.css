@@ -1,0 +1,48 @@
+/* Casa Jaguar — Typography
+   ONE corporate typeface: ROBOTO (client's updated direction — supersedes the
+   manual's Creato spec). Loaded from Google Fonts in tokens/fonts.css.
+   Hierarchy is built from WEIGHT + SIZE + wide tracking, not from a second family. */
+:root {
+  --cj-font: 'Roboto', system-ui, sans-serif;
+
+  /* back-compat aliases — both now resolve to the single Roboto family.
+     --cj-font-serif is kept so existing components keep working; it is NOT a serif. */
+  --cj-font-sans: var(--cj-font);
+  --cj-font-serif: var(--cj-font);
+
+  /* semantic roles — all one family, differentiated by weight/size/tracking */
+  --cj-font-display: var(--cj-font);   /* large editorial headlines (light weight) */
+  --cj-font-eyebrow: var(--cj-font);   /* letterspaced caps labels */
+  --cj-font-ui: var(--cj-font);        /* nav, buttons, meta */
+  --cj-font-body: var(--cj-font);      /* running paragraphs */
+
+  /* weights — Roboto: light / regular / medium / bold */
+  --cj-w-light: 300; /* @kind font */
+  --cj-w-regular: 400; /* @kind font */
+  --cj-w-medium: 500; /* @kind font */
+  --cj-w-bold: 700; /* @kind font */
+
+  /* type scale — editorial, generous */
+  --cj-t-eyebrow: 0.75rem;    /* 12px letterspaced caps */
+  --cj-t-meta: 0.8125rem;     /* 13px */
+  --cj-t-body-sm: 0.9375rem;  /* 15px */
+  --cj-t-body: 1.0625rem;     /* 17px */
+  --cj-t-body-lg: 1.25rem;    /* 20px lead */
+  --cj-t-h4: 1.5rem;          /* 24px */
+  --cj-t-h3: 2rem;            /* 32px */
+  --cj-t-h2: clamp(2.25rem, 4vw, 3.25rem); /* @kind font */
+  --cj-t-h1: clamp(3rem, 7vw, 6rem); /* @kind font */
+  --cj-t-display: clamp(3.5rem, 10vw, 8.5rem); /* @kind font */
+
+  /* line-heights */
+  --cj-lh-tight: 1.04; /* @kind other */
+  --cj-lh-snug: 1.18; /* @kind other */
+  --cj-lh-body: 1.62; /* @kind other */
+
+  /* letter-spacing — wide tracking is a signature (echoes logo caps) */
+  --cj-ls-eyebrow: 0.34em; /* @kind other */
+  --cj-ls-caps: 0.22em;
+  --cj-ls-wide: 0.08em;
+  --cj-ls-normal: 0.01em;
+  --cj-ls-tight: -0.01em;
+}

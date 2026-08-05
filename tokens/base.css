@@ -1,0 +1,34 @@
+/* Casa Jaguar — Base resets & primitives shared across cards/kits.
+   Intentionally light: sets link colors (required), selection, and helper classes. */
+:root { color-scheme: light; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cj-bg);
+  color: var(--cj-text);
+  font-family: var(--cj-font-body);
+  font-size: var(--cj-t-body);
+  line-height: var(--cj-lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links — defined even where none exist yet, so editor-added links inherit brand */
+a { color: var(--cj-ink); text-decoration: none; transition: color var(--cj-dur-fast) var(--cj-ease); }
+a:hover { color: var(--cj-clay); }
+
+::selection { background: var(--cj-ink); color: var(--cj-paper); }
+
+/* Signature editorial eyebrow — letterspaced caps (echoes the logo) */
+.cj-eyebrow {
+  font-family: var(--cj-font-eyebrow);
+  font-weight: var(--cj-w-regular);
+  font-size: var(--cj-t-eyebrow);
+  letter-spacing: var(--cj-ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--cj-text-subtle);
+}
+
+.cj-rule { height: 1px; background: var(--cj-line); border: 0; }
