@@ -388,15 +388,15 @@ function Lightbox({ project, onClose }) {
     const prevOv = document.body.style.overflow; document.body.style.overflow = 'hidden';
     return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prevOv; };
   }, [n]);
-  const arrowStyle = { width: 52, height: 52, borderRadius: '50%', border: '1px solid rgba(243,239,230,0.35)', background: 'rgba(43,37,33,0.4)', color: 'var(--cj-paper)', fontSize: 22, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto', transition: 'background var(--cj-dur-fast) var(--cj-ease)' };
+  const arrowStyle = { width: 'clamp(36px,9vw,52px)', height: 'clamp(36px,9vw,52px)', borderRadius: '50%', border: '1px solid rgba(243,239,230,0.35)', background: 'rgba(43,37,33,0.4)', color: 'var(--cj-paper)', fontSize: 22, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto', transition: 'background var(--cj-dur-fast) var(--cj-ease)' };
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(28,24,21,0.95)', backdropFilter: 'blur(4px)', display: 'flex', flexDirection: 'column', animation: 'cjFade var(--cj-dur) var(--cj-ease)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'clamp(1rem,3vw,1.6rem) clamp(1.25rem,5vw,3rem)', color: 'var(--cj-paper)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'clamp(0.6rem,2vw,1rem) clamp(0.75rem,4vw,3rem)', color: 'var(--cj-paper)' }}>
         <div>
           <div style={{ fontFamily: 'var(--cj-font-ui)', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(243,239,230,0.55)' }}>{project.cat}</div>
           <div style={{ fontFamily: 'var(--cj-font-serif)', fontWeight: 300, fontSize: 'clamp(1.3rem,3vw,1.8rem)', marginTop: 4 }}>{project.title}</div>
         </div>
-        <button onClick={onClose} aria-label="Cerrar" style={{ ...arrowStyle, width: 40, height: 40 }}><CloseIcon /></button>
+        <button onClick={onClose} aria-label="Cerrar" style={arrowStyle}><CloseIcon /></button>
       </div>
       <div onClick={(e) => e.stopPropagation()} style={{ flex: 1, minHeight: 0, display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem,2vw,1.5rem)', padding: '0 clamp(0.75rem,4vw,3rem)' }}>
         <button className="cj-lbarrow" onClick={prev} aria-label="Anterior" style={arrowStyle}><Chevron dir="left" /></button>
