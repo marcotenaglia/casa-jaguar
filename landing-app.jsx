@@ -94,7 +94,7 @@ function Nav() {
       </Container>
       {menuRender ? (
         <div className={'cj-mobilemenu ' + (open ? 'cj-mobilemenu-in' : 'cj-mobilemenu-out')}
-          onAnimationEnd={(e) => { if (e.animationName === 'cjMenuOut') setMenuRender(false); }}
+          onAnimationEnd={(e) => { if (e.animationName === 'cjMenuSlideUp') setMenuRender(false); }}
           style={{ borderTop: '1px solid var(--cj-line)', background: 'var(--cj-white)' }}>
           <Container style={{ paddingTop: 18, paddingBottom: 18, display: 'flex', flexDirection: 'column', gap: 4 }}>
             {links.map((l) => <a key={l} href={'#' + l.toLowerCase()} onClick={() => setOpen(false)} style={{ padding: '10px 0', fontFamily: 'var(--cj-font-ui)', fontSize: 14, letterSpacing: '0.16em', textTransform: 'uppercase' }}>{l}</a>)}
@@ -152,7 +152,7 @@ function HeroFull() {
   return (
     <section id="top" className="cj-herofull" style={{ position: 'relative', minHeight: 'min(90vh, 820px)', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
       <img className="cj-herofull-bg" src={PHOTO.heroLamp} alt="Proyecto Casa Jaguar" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-      <div className="cj-herofull-scrim" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(28,24,21,0.7) 0%, rgba(28,24,21,0.26) 46%, rgba(28,24,21,0.4) 100%)' }} />
+      <div className="cj-herofull-scrim" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(28,24,21,0.82) 0%, rgba(28,24,21,0.45) 46%, rgba(28,24,21,0.58) 100%)' }} />
       <Container style={{ position: 'relative', width: '100%', paddingTop: 'clamp(4rem,10vw,7rem)', paddingBottom: 'clamp(3rem,7vw,6rem)' }}>
         <div className="cj-herofull-copy" style={{ maxWidth: 780 }}>
           <div className="cj-eyebrow cj-herofull-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>Interiorismo · Dirección creativa · Rosario</div>

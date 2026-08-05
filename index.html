@@ -30,17 +30,19 @@
     .cj-navlinks,.cj-navcta{display:none !important}
     .cj-burger{display:flex !important}
   }
-  @keyframes cjMenuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-  @keyframes cjMenuOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-8px)}}
+  /* Menú mobile — se despliega como cortina de arriba hacia abajo (ease-in-out) */
+  @keyframes cjMenuSlideDown{from{max-height:0;opacity:.5}to{max-height:32rem;opacity:1}}
+  @keyframes cjMenuSlideUp{from{max-height:32rem;opacity:1}to{max-height:0;opacity:0}}
+  @keyframes cjMenuLinkIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   .cj-mobilemenu{overflow:hidden}
-  .cj-mobilemenu-in{animation:cjMenuIn .32s cubic-bezier(.2,.6,.2,1) both}
-  .cj-mobilemenu-out{animation:cjMenuOut .26s cubic-bezier(.2,.6,.2,1) both}
-  .cj-mobilemenu-in a{opacity:0;animation:cjMenuIn .4s cubic-bezier(.2,.6,.2,1) forwards}
-  .cj-mobilemenu-in a:nth-child(1){animation-delay:.04s}
-  .cj-mobilemenu-in a:nth-child(2){animation-delay:.09s}
-  .cj-mobilemenu-in a:nth-child(3){animation-delay:.14s}
-  .cj-mobilemenu-in a:nth-child(4){animation-delay:.19s}
-  .cj-mobilemenu-in a:nth-child(5){animation-delay:.24s}
+  .cj-mobilemenu-in{animation:cjMenuSlideDown .44s cubic-bezier(.65,0,.35,1) both}
+  .cj-mobilemenu-out{animation:cjMenuSlideUp .36s cubic-bezier(.65,0,.35,1) both}
+  .cj-mobilemenu-in a{opacity:0;animation:cjMenuLinkIn .4s cubic-bezier(.2,.6,.2,1) forwards}
+  .cj-mobilemenu-in a:nth-child(1){animation-delay:.1s}
+  .cj-mobilemenu-in a:nth-child(2){animation-delay:.16s}
+  .cj-mobilemenu-in a:nth-child(3){animation-delay:.22s}
+  .cj-mobilemenu-in a:nth-child(4){animation-delay:.28s}
+  .cj-mobilemenu-in a:nth-child(5){animation-delay:.34s}
   @keyframes cjFade{from{opacity:0}to{opacity:1}}
   @keyframes cjHeroUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   .cj-hero-in>*{animation:cjHeroUp 1.1s cubic-bezier(.2,.6,.2,1) both}
@@ -86,8 +88,8 @@
   /* Home / hero — mobile: texto a los bordes, botón 100%, tag sin superposición */
   @media(max-width:900px){
     .cj-herofull-lead{max-width:none !important}
-    .cj-herofull-cta{flex-direction:column;align-items:flex-start;gap:16px !important}
-    .cj-herofull-cta>*:first-child{width:100%}
+    .cj-herofull-cta{flex-direction:column !important;align-items:flex-start !important;gap:16px !important}
+    .cj-herofull-cta>a:first-child{width:100% !important}
     .cj-herofull-tag{position:static !important;right:auto !important;bottom:auto !important;display:block;margin-top:1.8rem}
   }
 </style>
