@@ -440,7 +440,7 @@ function Advisory() {
               ))}
             </div>
           </div>
-          <div className="cj-photo" style={{ position: 'relative', overflow: 'hidden', borderRadius: 'var(--cj-radius)', minHeight: 340, background: 'var(--cj-stone-100)' }}>
+          <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 'var(--cj-radius)', minHeight: 340, background: 'var(--cj-stone-100)' }}>
             <img src={PHOTO.hero} alt="Proyecto Casa Jaguar" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </div>
