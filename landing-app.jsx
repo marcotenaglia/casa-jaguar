@@ -98,7 +98,7 @@ function Nav() {
           ))}
         </nav>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div className="cj-navcta"><Button variant="primary" size="sm" href={WA_URL} icon={<WAIcon size="1.15em" />}>Escribinos</Button></div>
+          <div className="cj-navcta"><Button variant="primary" size="sm" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon size="1.15em" />}>Escribinos</Button></div>
           <button className="cj-burger" onClick={() => setOpen(!open)} aria-label="Menú" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'none', border: 0, cursor: 'pointer', padding: 6 }}>
             <span style={{ width: 22, height: 1, background: 'var(--cj-ink)' }} /><span style={{ width: 22, height: 1, background: 'var(--cj-ink)' }} /><span style={{ width: 22, height: 1, background: 'var(--cj-ink)' }} />
           </button>
@@ -110,7 +110,7 @@ function Nav() {
           style={{ borderTop: '1px solid var(--cj-line)', background: 'var(--cj-white)' }}>
           <Container style={{ paddingTop: 18, paddingBottom: 18, display: 'flex', flexDirection: 'column', gap: 4 }}>
             {links.map((l) => <a key={l} href={'#' + l.toLowerCase()} onClick={() => setOpen(false)} style={{ padding: '10px 0', fontFamily: 'var(--cj-font-ui)', fontSize: 14, letterSpacing: '0.16em', textTransform: 'uppercase' }}>{l}</a>)}
-            <div style={{ marginTop: 10 }}><Button variant="primary" size="md" full href={WA_URL} icon={<WAIcon />}>Escribinos</Button></div>
+            <div style={{ marginTop: 10 }}><Button variant="primary" size="md" full href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon />}>Escribinos</Button></div>
           </Container>
         </div>
       ) : null}
@@ -136,7 +136,7 @@ function Hero() {
               Dejanos tu contacto y nos comunicamos. Interiorismo y dirección creativa para espacios residenciales y comerciales.
             </p>
             <div style={{ display: 'flex', gap: 18, marginTop: '2.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <Button variant="primary" size="lg" href={WA_URL} icon={<WAIcon />}>Escribinos</Button>
+              <Button variant="primary" size="lg" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon />}>Escribinos</Button>
               <Button variant="ghost" size="lg" href="#contacto">Solicitar asesoramiento</Button>
             </div>
           </div>
@@ -178,7 +178,7 @@ function HeroFull() {
             Dejanos tu contacto y nos comunicamos. Interiorismo y dirección creativa para espacios residenciales y comerciales.
           </p>
           <div className="cj-herofull-cta" style={{ display: 'flex', gap: 22, marginTop: '2.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <Button variant="accent" size="lg" href={WA_URL} icon={<WAIcon />}>Escribinos</Button>
+            <Button variant="accent" size="lg" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon />}>Escribinos</Button>
             <a className="cj-herofull-link" href="#contacto" style={{ fontFamily: 'var(--cj-font-ui)', fontSize: 13, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--cj-paper)', display: 'inline-flex', alignItems: 'center', gap: 10, boxShadow: 'inset 0 -1px 0 rgba(243,239,230,0.45)', paddingBottom: 5 }}>Solicitar asesoramiento <ArrowIcon /></a>
           </div>
         </div>
@@ -295,7 +295,7 @@ function Objects() {
               Mobiliario, iluminación y objetos con entrega inmediata, junto con opciones que pueden desarrollarse a medida para cada espacio. Entrega coordinada en Rosario.
             </p>
           </div>
-          <Button variant="ghost" href={WA_URL} icon={ARROW} iconRight>Escribinos para ver opciones</Button>
+          <Button variant="ghost" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={ARROW} iconRight>Escribinos para ver opciones</Button>
         </div>
         <div className="cj-grid3" style={{ marginTop: '3rem' }}>
           {objs.map(([img, cat, name]) => (
@@ -332,7 +332,7 @@ function Works() {
             <Eyebrow index="04" rule>Trabajos</Eyebrow>
             <h2 style={{ margin: '1.4rem 0 0', maxWidth: '20ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.1, color: 'var(--cj-ink)' }}>Proyectos para espacios en transformación</h2>
           </div>
-          <Button variant="ghost" href={WA_URL} icon={ARROW} iconRight>Consultar proyectos</Button>
+          <Button variant="ghost" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={ARROW} iconRight>Consultar proyectos</Button>
         </div>
         <div className="cj-works-a" style={{ marginTop: '3rem' }}>
           {rowA.map((p) => <WorkTile key={p.title} p={p} ratio="16 / 11" onOpen={() => setOpen(idxOf(p))} />)}
@@ -432,7 +432,7 @@ function Advisory() {
             </p>
             <div style={{ display: 'flex', gap: 16, marginTop: '2.2rem', flexWrap: 'wrap' }}>
               <Button variant="accent" size="lg" href={FORM_URL} target="_blank" rel="noopener" icon={ARROW} iconRight>Completar formulario</Button>
-              <Button variant="ghost" size="lg" href={WA_URL} icon={<WAIcon size={18} />} style={{ color: 'var(--cj-paper)', boxShadow: 'inset 0 -1px 0 rgba(243,239,230,0.4)' }}>Escribinos</Button>
+              <Button variant="ghost" size="lg" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon size={18} />} style={{ color: 'var(--cj-paper)', boxShadow: 'inset 0 -1px 0 rgba(243,239,230,0.4)' }}>Escribinos</Button>
             </div>
             <div style={{ marginTop: '2.6rem', display: 'flex', gap: 40, flexWrap: 'wrap' }}>
               {[['Estudio', ADDRESS], ['Teléfono', PHONE], ['Horarios', HOURS], ['Instagram', IG]].map(([l, v]) => (
@@ -501,7 +501,7 @@ function FooterCol({ title, items }) {
     <div>
       <div className="cj-eyebrow" style={{ fontSize: 11 }}>{title}</div>
       <ul style={{ listStyle: 'none', margin: '1.2rem 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {items.map(([label, href]) => <li key={label}><a href={href} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--cj-font-serif)', fontSize: 15, color: 'var(--cj-ink)' }}>{href === WA_URL ? <WAIcon size="0.95em" /> : (href === IG_URL ? <IGIcon size="1em" /> : null)}{label}</a></li>)}
+        {items.map(([label, href]) => { const ext = href.startsWith('http'); return <li key={label}><a href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'var(--cj-font-serif)', fontSize: 15, color: 'var(--cj-ink)' }}>{href === WA_URL ? <WAIcon size="1.3em" /> : (href === IG_URL ? <IGIcon size="1.35em" /> : null)}{label}</a></li>; })}
       </ul>
     </div>
   );
