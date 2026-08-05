@@ -43,8 +43,8 @@ const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdvbNWCvB8BWleIj4hngz
 const WA_URL = 'https://wa.me/5493412612779';
 const IG = '@casajaguar.ar';
 const IG_URL = 'https://instagram.com/casajaguar.ar';
-const PHONE = '+54 341 261-2779';
-const TEL_URL = 'tel:+543412612779';
+const PHONE = '+54 9 341 261-2779';
+const TEL_URL = 'tel:+5493412612779';
 const ADDRESS = 'Urquiza 1558, Rosario, Santa Fe';
 const HOURS = 'Lun a Vie 10–18 · Sáb 10–13';
 
