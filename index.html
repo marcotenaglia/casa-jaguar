@@ -79,7 +79,8 @@
     .cj-hero-in>*{animation:none !important}
   }
   .cj-lbarrow:hover{background:rgba(160,42,32,0.85) !important}
-  #servicios .cj-service:last-child{border-bottom:0}
+  .cj-section-anchor{scroll-margin-top:100px}
+  .cj-services .cj-service:last-child{border-bottom:0}
   .cj-photo{position:relative}
   .cj-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(28,24,21,0.42) 0%, rgba(28,24,21,0.12) 40%, rgba(28,24,21,0) 70%);opacity:1;transition:opacity .7s cubic-bezier(.2,.6,.2,1);pointer-events:none;z-index:1}
   .cj-photo:hover::after{opacity:0}
@@ -147,8 +148,7 @@
         lenis.scrollTo(0);
         return;
       }
-      var eyebrow = target.querySelector('.cj-eyebrow');
-      lenis.scrollTo(eyebrow || target, { offset: -100 });
+      lenis.scrollTo(target, { offset: -100 });
     });
   })();
 </script>

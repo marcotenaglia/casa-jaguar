@@ -209,9 +209,11 @@ function Manifesto() {
 /* ———————————————————————————————— STUDIO ———————————————————————————————— */
 function Studio() {
   return (
-    <section id="estudio" className="cj-studio" style={{ paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section className="cj-studio" style={{ paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
-        <Eyebrow index="01" rule>El estudio</Eyebrow>
+        <div id="estudio" className="cj-section-anchor">
+          <Eyebrow index="01" rule>El estudio</Eyebrow>
+        </div>
         <div className="cj-two" style={{ marginTop: '2.5rem' }}>
           <h2 style={{ margin: 0, fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.12, letterSpacing: '-0.01em', color: 'var(--cj-ink)' }}>
             Casa Jaguar nace del cruce entre interiorismo, dirección creativa y la sensibilidad del textil.
@@ -250,9 +252,11 @@ function Services() {
     ['Desarrollo de mobiliario y piezas', 'Bibliotecas, mesas, sillas e iluminación para integrar en proyectos. También desarrollamos cada espacio a medida.'],
   ];
   return (
-    <section id="servicios" className="cj-services" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section className="cj-services" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
-        <Eyebrow index="02" rule>Servicios</Eyebrow>
+        <div id="servicios" className="cj-section-anchor">
+          <Eyebrow index="02" rule>Servicios</Eyebrow>
+        </div>
         <h2 style={{ margin: '1.4rem 0 0', maxWidth: '24.6ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.1, color: 'var(--cj-ink)' }}>
           Líneas que se adaptan a todos los espacios y presupuestos.
         </h2>
@@ -286,10 +290,10 @@ function Objects() {
     [PHOTO.shelf, 'Mobiliario', 'Biblioteca abierta'],
   ];
   return (
-    <section id="objetos" className="cj-objects" style={{ paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section className="cj-objects" style={{ paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 24, flexWrap: 'wrap' }}>
-          <div style={{ maxWidth: '55ch' }}>
+          <div id="objetos" className="cj-section-anchor" style={{ maxWidth: '55ch' }}>
             <Eyebrow index="03" rule>Objetos · Feria del estudio</Eyebrow>
             <h2 style={{ margin: '1.4rem 0 0', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.1, color: 'var(--cj-ink)' }}>Piezas seleccionadas del estudio</h2>
             <p style={{ margin: '1.2rem 0 0', maxWidth: '47ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.6, color: 'var(--cj-ink-soft)' }}>
@@ -326,10 +330,10 @@ function Works() {
   const rowB = [PROJECTS[2], PROJECTS[3], PROJECTS[4]];
   const idxOf = (p) => PROJECTS.indexOf(p);
   return (
-    <section id="trabajos" className="cj-works" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section className="cj-works" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 24, flexWrap: 'wrap' }}>
-          <div>
+          <div id="trabajos" className="cj-section-anchor">
             <Eyebrow index="04" rule>Trabajos</Eyebrow>
             <h2 style={{ margin: '1.4rem 0 0', maxWidth: '20ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.1, color: 'var(--cj-ink)' }}>Proyectos para espacios en transformación</h2>
           </div>
@@ -422,10 +426,10 @@ function Lightbox({ project, onClose }) {
 /* ———————————————————————————————— ADVISORY ———————————————————————————————— */
 function Advisory() {
   return (
-    <section id="contacto" className="cj-contact" style={{ background: 'var(--cj-ink)', color: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section className="cj-contact" style={{ background: 'var(--cj-ink)', color: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <div className="cj-advisory" style={{ alignItems: 'stretch', gap: 'clamp(2rem,5vw,4.5rem)' }}>
-          <div>
+          <div id="contacto" className="cj-section-anchor">
             <Eyebrow index="05" rule color="rgba(243,239,230,0.6)">Asesoramiento</Eyebrow>
             <h2 style={{ margin: '1.6rem 0 0', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.08, color: 'var(--cj-paper)' }}>Solicitá tu asesoramiento</h2>
             <p style={{ margin: '1.6rem 0 0', maxWidth: '46ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.6, color: 'rgba(243,239,230,0.78)' }}>
