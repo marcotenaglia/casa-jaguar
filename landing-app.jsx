@@ -91,7 +91,7 @@ function Nav() {
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 40, background: 'rgba(255,255,255,0.86)', backdropFilter: 'saturate(1.1) blur(10px)', WebkitBackdropFilter: 'saturate(1.1) blur(10px)', borderBottom: `1px solid ${scrolled ? 'var(--cj-line)' : 'transparent'}`, transition: 'border-color var(--cj-dur) var(--cj-ease)' }}>
       <Container style={{ height: 76, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24 }}>
-        <Lockup />
+        <a href="#top" aria-label="Casa Jaguar — inicio" style={{ display: 'inline-flex', alignItems: 'center' }}><Lockup /></a>
         <nav className="cj-navlinks" style={{ display: 'flex', gap: 34 }}>
           {links.map((l) => (
             <a key={l} href={'#' + l.toLowerCase()} style={{ fontFamily: 'var(--cj-font-ui)', fontSize: 13, letterSpacing: '0.16em', textTransform: 'uppercase' }}>{l}</a>
@@ -481,7 +481,7 @@ function Footer() {
       <Container>
         <div className="cj-footer">
           <div style={{ maxWidth: 340 }}>
-            <img src={LOGOTIPO} alt="Casa Jaguar" style={{ height: 44, width: 'auto', display: 'block' }} />
+            <a href="#top" aria-label="Casa Jaguar — inicio" style={{ display: 'inline-block' }}><img src={LOGOTIPO} alt="Casa Jaguar" style={{ height: 44, width: 'auto', display: 'block' }} /></a>
             <p style={{ margin: '1.4rem 0 0', fontSize: 'var(--cj-t-body-sm)', lineHeight: 1.6, color: 'var(--cj-ink-soft)' }}>Estudio de interiorismo y dirección creativa. Residencial y comercial · Cita previa. Urquiza 1558, Rosario, Santa Fe.</p>
           </div>
           <FooterCol title="Navegación" items={[['Estudio', '#estudio'], ['Servicios', '#servicios'], ['Objetos', '#objetos'], ['Trabajos', '#trabajos'], ['Contacto', '#contacto']]} />
