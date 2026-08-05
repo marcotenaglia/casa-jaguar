@@ -163,7 +163,7 @@ function Hero() {
 /* ——————————————————————— HERO (overlay / full-bleed) ——————————————————————— */
 function HeroFull() {
   return (
-    <section id="top" className="cj-herofull" style={{ position: 'relative', minHeight: 'min(90vh, 820px)', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+    <section id="top" className="cj-herofull" style={{ position: 'relative', minHeight: 'calc(100svh - 77px)', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
       <img className="cj-herofull-bg" src={PHOTO.heroLamp} alt="Proyecto Casa Jaguar" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
       <div className="cj-herofull-scrim" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(28,24,21,0.82) 0%, rgba(28,24,21,0.45) 46%, rgba(28,24,21,0.58) 100%)' }} />
       <Container style={{ position: 'relative', width: '100%', paddingTop: 'clamp(4rem,10vw,7rem)', paddingBottom: 'clamp(3rem,7vw,6rem)' }}>
