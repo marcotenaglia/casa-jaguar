@@ -19,6 +19,7 @@ const PHOTO = {
   extra: A + '/photos/real-extra.png',
   hero2: A + '/photos/real-hero.png',
   shelf2: A + '/photos/real-shelf.jpg',
+  advisory: A + '/photos/real-advisory.png',
 };
 const ARROW = '\u2192';
 const ArrowIcon = ({ size = 16 }) => (
@@ -441,7 +442,7 @@ function Advisory() {
             </div>
           </div>
           <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 'var(--cj-radius)', minHeight: 340, background: 'var(--cj-stone-100)' }}>
-            <img src={PHOTO.hero} alt="Proyecto Casa Jaguar" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={PHOTO.advisory} alt="Proyecto Casa Jaguar" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </div>
       </Container>
@@ -501,7 +502,7 @@ function FooterCol({ title, items }) {
     <div>
       <div className="cj-eyebrow" style={{ fontSize: 11 }}>{title}</div>
       <ul style={{ listStyle: 'none', margin: '1.2rem 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {items.map(([label, href]) => { const ext = href.startsWith('http'); return <li key={label}><a href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'var(--cj-font-serif)', fontSize: 15, color: 'var(--cj-ink)' }}>{href === WA_URL ? <WAIcon size="1.3em" /> : (href === IG_URL ? <IGIcon size="1.35em" /> : null)}{label}</a></li>; })}
+        {items.map(([label, href]) => { const ext = href.startsWith('http'); return <li key={label}><a className="cj-footer-link" href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'var(--cj-font-serif)', fontSize: 15, color: 'var(--cj-ink)' }}>{href === WA_URL ? <WAIcon size="1.3em" /> : (href === IG_URL ? <IGIcon size="1.35em" /> : null)}{label}</a></li>; })}
       </ul>
     </div>
   );
