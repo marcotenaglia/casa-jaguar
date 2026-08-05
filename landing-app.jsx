@@ -67,12 +67,14 @@ const Lockup = ({ dark }) => (
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [menuRender, setMenuRender] = useState(false);
   useEffect(() => {
     const el = document.getElementById('cj-scroll');
     const onScroll = () => setScrolled((el ? el.scrollTop : window.scrollY) > 12);
     (el || window).addEventListener('scroll', onScroll);
     return () => (el || window).removeEventListener('scroll', onScroll);
   }, []);
+  useEffect(() => { if (open) setMenuRender(true); }, [open]);
   const links = ['Estudio', 'Servicios', 'Objetos', 'Trabajos', 'Contacto'];
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 40, background: 'rgba(255,255,255,0.86)', backdropFilter: 'saturate(1.1) blur(10px)', WebkitBackdropFilter: 'saturate(1.1) blur(10px)', borderBottom: `1px solid ${scrolled ? 'var(--cj-line)' : 'transparent'}`, transition: 'border-color var(--cj-dur) var(--cj-ease)' }}>
@@ -90,8 +92,10 @@ function Nav() {
           </button>
         </div>
       </Container>
-      {open ? (
-        <div className="cj-mobilemenu" style={{ borderTop: '1px solid var(--cj-line)', background: 'var(--cj-white)' }}>
+      {menuRender ? (
+        <div className={'cj-mobilemenu ' + (open ? 'cj-mobilemenu-in' : 'cj-mobilemenu-out')}
+          onAnimationEnd={(e) => { if (e.animationName === 'cjMenuOut') setMenuRender(false); }}
+          style={{ borderTop: '1px solid var(--cj-line)', background: 'var(--cj-white)' }}>
           <Container style={{ paddingTop: 18, paddingBottom: 18, display: 'flex', flexDirection: 'column', gap: 4 }}>
             {links.map((l) => <a key={l} href={'#' + l.toLowerCase()} onClick={() => setOpen(false)} style={{ padding: '10px 0', fontFamily: 'var(--cj-font-ui)', fontSize: 14, letterSpacing: '0.16em', textTransform: 'uppercase' }}>{l}</a>)}
             <div style={{ marginTop: 10 }}><Button variant="primary" size="md" full href={WA_URL} icon={<WAIcon />}>Escribinos</Button></div>
@@ -146,27 +150,27 @@ function Hero() {
 /* ——————————————————————— HERO (overlay / full-bleed) ——————————————————————— */
 function HeroFull() {
   return (
-    <section id="top" style={{ position: 'relative', minHeight: 'min(90vh, 820px)', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-      <img src={PHOTO.heroLamp} alt="Proyecto Casa Jaguar" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(28,24,21,0.7) 0%, rgba(28,24,21,0.26) 46%, rgba(28,24,21,0.4) 100%)' }} />
+    <section id="top" className="cj-herofull" style={{ position: 'relative', minHeight: 'min(90vh, 820px)', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <img className="cj-herofull-bg" src={PHOTO.heroLamp} alt="Proyecto Casa Jaguar" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div className="cj-herofull-scrim" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(28,24,21,0.7) 0%, rgba(28,24,21,0.26) 46%, rgba(28,24,21,0.4) 100%)' }} />
       <Container style={{ position: 'relative', width: '100%', paddingTop: 'clamp(4rem,10vw,7rem)', paddingBottom: 'clamp(3rem,7vw,6rem)' }}>
-        <div style={{ maxWidth: 780 }}>
-          <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>Interiorismo · Dirección creativa · Rosario</div>
-          <h1 style={{ margin: '1.4rem 0 0', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h1)', lineHeight: 'var(--cj-lh-tight)', letterSpacing: '-0.01em', color: 'var(--cj-paper)' }}>
+        <div className="cj-herofull-copy" style={{ maxWidth: 780 }}>
+          <div className="cj-eyebrow cj-herofull-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>Interiorismo · Dirección creativa · Rosario</div>
+          <h1 className="cj-herofull-title" style={{ margin: '1.4rem 0 0', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h1)', lineHeight: 'var(--cj-lh-tight)', letterSpacing: '-0.01em', color: 'var(--cj-paper)' }}>
             ¿Estás en obra<br />o en reformas?
           </h1>
-          <p style={{ margin: '1.3rem 0 0', maxWidth: '36ch', fontFamily: 'var(--cj-font-display)', fontStyle: 'italic', fontSize: 'var(--cj-t-h4)', lineHeight: 1.3, color: 'var(--cj-paper)' }}>
+          <p className="cj-herofull-lead cj-herofull-lead--accent" style={{ margin: '1.3rem 0 0', maxWidth: '36ch', fontFamily: 'var(--cj-font-display)', fontStyle: 'italic', fontSize: 'var(--cj-t-h4)', lineHeight: 1.3, color: 'var(--cj-paper)' }}>
             ¿Te gustaría que te asesoremos?
           </p>
-          <p style={{ margin: '1.4rem 0 0', maxWidth: '44ch', fontFamily: 'var(--cj-font-body)', fontSize: 'var(--cj-t-body-lg)', lineHeight: 1.55, color: 'rgba(243,239,230,0.86)' }}>
+          <p className="cj-herofull-lead" style={{ margin: '1.4rem 0 0', maxWidth: '44ch', fontFamily: 'var(--cj-font-body)', fontSize: 'var(--cj-t-body-lg)', lineHeight: 1.55, color: 'rgba(243,239,230,0.86)' }}>
             Dejanos tu contacto y nos comunicamos. Interiorismo y dirección creativa para espacios residenciales y comerciales.
           </p>
-          <div style={{ display: 'flex', gap: 22, marginTop: '2.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div className="cj-herofull-cta" style={{ display: 'flex', gap: 22, marginTop: '2.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
             <Button variant="accent" size="lg" href={WA_URL} icon={<WAIcon />}>Escribinos</Button>
-            <a href="#contacto" style={{ fontFamily: 'var(--cj-font-ui)', fontSize: 13, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--cj-paper)', display: 'inline-flex', alignItems: 'center', gap: 10, boxShadow: 'inset 0 -1px 0 rgba(243,239,230,0.45)', paddingBottom: 5 }}>Solicitar asesoramiento <ArrowIcon /></a>
+            <a className="cj-herofull-link" href="#contacto" style={{ fontFamily: 'var(--cj-font-ui)', fontSize: 13, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--cj-paper)', display: 'inline-flex', alignItems: 'center', gap: 10, boxShadow: 'inset 0 -1px 0 rgba(243,239,230,0.45)', paddingBottom: 5 }}>Solicitar asesoramiento <ArrowIcon /></a>
           </div>
         </div>
-        <span style={{ position: 'absolute', right: 'var(--cj-gutter)', bottom: 'clamp(3rem,7vw,6rem)', fontFamily: 'var(--cj-font-ui)', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(243,239,230,0.7)' }}>Proyecto Edificio Costavía</span>
+        <span className="cj-herofull-tag" style={{ position: 'absolute', right: 'var(--cj-gutter)', bottom: 'clamp(3rem,7vw,6rem)', fontFamily: 'var(--cj-font-ui)', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(243,239,230,0.7)' }}>Proyecto Edificio Costavía</span>
       </Container>
     </section>
   );
@@ -175,8 +179,8 @@ function HeroFull() {
 /* ———————————————————————————————— MANIFESTO ———————————————————————————————— */
 function Manifesto() {
   return (
-    <section style={{ background: 'var(--cj-paper)', paddingTop: 'clamp(4.5rem,9vw,7rem)', paddingBottom: 'clamp(4.5rem,9vw,7rem)' }}>
-      <Container style={{ maxWidth: 806, textAlign: 'center', paddingLeft: 0, paddingRight: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <section className="cj-manifesto" style={{ background: 'var(--cj-paper)', paddingTop: 'clamp(4.5rem,9vw,7rem)', paddingBottom: 'clamp(4.5rem,9vw,7rem)' }}>
+      <Container style={{ maxWidth: 806, textAlign: 'center', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <p style={{ margin: '2rem 0 0', maxWidth: '31.1ch', width: '100%', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'clamp(1.9rem,3.4vw,2.9rem)', lineHeight: 1.18, letterSpacing: '-0.01em', color: 'var(--cj-ink)' }}>
           Pensamos el espacio como experiencia, donde intervienen todos los sentidos.
         </p>
@@ -192,7 +196,7 @@ function Manifesto() {
 /* ———————————————————————————————— STUDIO ———————————————————————————————— */
 function Studio() {
   return (
-    <section id="estudio" style={{ paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section id="estudio" className="cj-studio" style={{ paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <Eyebrow index="01" rule>El estudio</Eyebrow>
         <div className="cj-two" style={{ marginTop: '2.5rem' }}>
@@ -233,7 +237,7 @@ function Services() {
     ['Desarrollo de mobiliario y piezas', 'Bibliotecas, mesas, sillas e iluminación para integrar en proyectos. También desarrollamos cada espacio a medida.'],
   ];
   return (
-    <section id="servicios" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section id="servicios" className="cj-services" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <Eyebrow index="02" rule>Servicios</Eyebrow>
         <h2 style={{ margin: '1.4rem 0 0', maxWidth: '24.6ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.1, color: 'var(--cj-ink)' }}>
@@ -269,7 +273,7 @@ function Objects() {
     [PHOTO.shelf, 'Mobiliario', 'Biblioteca abierta'],
   ];
   return (
-    <section id="objetos" style={{ paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section id="objetos" className="cj-objects" style={{ paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 24, flexWrap: 'wrap' }}>
           <div style={{ maxWidth: '55ch' }}>
@@ -309,7 +313,7 @@ function Works() {
   const rowB = [PROJECTS[2], PROJECTS[3], PROJECTS[4]];
   const idxOf = (p) => PROJECTS.indexOf(p);
   return (
-    <section id="trabajos" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section id="trabajos" className="cj-works" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 24, flexWrap: 'wrap' }}>
           <div>
@@ -405,7 +409,7 @@ function Lightbox({ project, onClose }) {
 /* ———————————————————————————————— ADVISORY ———————————————————————————————— */
 function Advisory() {
   return (
-    <section id="contacto" style={{ background: 'var(--cj-ink)', color: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
+    <section id="contacto" className="cj-contact" style={{ background: 'var(--cj-ink)', color: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <div className="cj-advisory" style={{ alignItems: 'stretch', gap: 'clamp(2rem,5vw,4.5rem)' }}>
           <div>
@@ -461,7 +465,7 @@ function AdvisoryForm_HIDDEN() {
 /* ————————————————————————————————— FOOTER ————————————————————————————————— */
 function Footer() {
   return (
-    <footer style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-space-9)', paddingBottom: 'var(--cj-space-7)' }}>
+    <footer className="cj-site-footer" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-space-9)', paddingBottom: 'var(--cj-space-7)' }}>
       <Container>
         <div className="cj-footer">
           <div style={{ maxWidth: 340 }}>
