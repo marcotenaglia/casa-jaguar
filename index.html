@@ -134,7 +134,7 @@
     window.lenis = lenis;
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
-    // Anclas suaves con offset por el nav fijo
+    // Anclas suaves: alinean la volanta editorial, no el borde de la seccion.
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href^="#"]');
       if (!a) return;
@@ -143,7 +143,12 @@
       var target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      lenis.scrollTo(target, { offset: -80 });
+      if (id === '#top') {
+        lenis.scrollTo(0);
+        return;
+      }
+      var eyebrow = target.querySelector('.cj-eyebrow');
+      lenis.scrollTo(eyebrow || target, { offset: -100 });
     });
   })();
 </script>
