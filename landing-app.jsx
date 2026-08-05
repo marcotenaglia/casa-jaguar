@@ -193,12 +193,12 @@ function HeroFull() {
 function Manifesto() {
   return (
     <section className="cj-manifesto" style={{ background: 'var(--cj-paper)', paddingTop: 'clamp(4.5rem,9vw,7rem)', paddingBottom: 'clamp(4.5rem,9vw,7rem)' }}>
-      <Container style={{ maxWidth: 806, textAlign: 'center', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <p style={{ margin: '2rem 0 0', maxWidth: '31.1ch', width: '100%', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'clamp(1.9rem,3.4vw,2.9rem)', lineHeight: 1.18, letterSpacing: '-0.01em', color: 'var(--cj-ink)' }}>
+      <Container style={{ maxWidth: 1060, textAlign: 'center', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <p style={{ margin: '2rem 0 0', maxWidth: '43ch', width: '100%', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'clamp(1.9rem,3.4vw,2.9rem)', lineHeight: 1.18, letterSpacing: '-0.01em', color: 'var(--cj-ink)' }}>
           Pensamos el espacio como experiencia, donde intervienen todos los sentidos.
         </p>
         <div style={{ width: 50, height: 1, background: 'var(--cj-line-strong)', margin: '1.4rem 0' }} />
-        <p style={{ margin: '0', maxWidth: '52ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.65, color: 'var(--cj-ink-soft)' }}>
+        <p style={{ margin: '0', maxWidth: '68ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.65, color: 'var(--cj-ink-soft)' }}>
           Nada es al azar: materiales, proporciones y vacíos. La composición se ajusta hasta que cada elemento encuentra su relación con el conjunto.
         </p>
       </Container>
