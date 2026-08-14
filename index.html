@@ -8,20 +8,59 @@
 <title>Casa Jaguar — Interiorismo & Dirección Creativa</title>
 <link rel="stylesheet" href="./styles.css">
 <script src="./_ds_bundle.js"></script>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
 <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
 <style>
   html,body{margin:0;background:var(--cj-white)}
   img{max-width:100%}
+  a{color:var(--cj-ink);text-decoration:none}
+  a:not(.cj-herosplit-panel):not(.cj-cat):hover{color:var(--cj-brick)}
   /* Lenis — smooth scroll */
   html.lenis,html.lenis body{height:auto}
   .lenis.lenis-smooth{scroll-behavior:auto !important}
   .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
   .lenis.lenis-stopped{overflow:hidden}
   .lenis.lenis-smooth iframe{pointer-events:none}
-  /* Hero split */
+  /* Home — Pantalla 1: dos bloques (Proyectos / Tienda) */
+  .cj-herosplit{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100svh - 77px)}
+  .cj-herosplit-panel{position:relative;overflow:hidden;display:flex;align-items:flex-end;min-height:56vh;color:var(--cj-paper);text-decoration:none}
+  .cj-herosplit-panel:first-child{border-right:1px solid rgba(243,239,230,0.16)}
+  .cj-herosplit-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform 1.3s cubic-bezier(.2,.6,.2,1)}
+  .cj-herosplit-panel:hover .cj-herosplit-bg{transform:scale(1.06)}
+  .cj-herosplit-panel:hover,.cj-herosplit-panel:hover .cj-herosplit-title,.cj-herosplit-panel:hover .cj-cta-label{color:var(--cj-paper) !important}
+  .cj-herosplit-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,24,21,0.80) 0%,rgba(28,24,21,0.34) 55%,rgba(28,24,21,0.5) 100%)}
+  .cj-herosplit-inner{position:relative;padding:clamp(2rem,5vw,4rem);max-width:44ch}
+  .cj-herosplit-title{margin:.6rem 0 0;font-family:var(--cj-font-display);font-weight:300;font-size:clamp(2.6rem,5.2vw,4.2rem);line-height:1;letter-spacing:-0.01em}
+  .cj-herosplit-line{margin:1rem 0 0;font-weight:300;font-size:var(--cj-t-body-lg);line-height:1.42;color:rgba(243,239,230,0.82)}
+  .cj-herosplit-cta{display:inline-flex;align-items:center;gap:10px;margin-top:1.6rem;font-family:var(--cj-font-ui);font-size:13px;letter-spacing:0.16em;text-transform:uppercase}
+  .cj-cta-label{box-shadow:inset 0 -1px 0 rgba(243,239,230,0.5);padding-bottom:2px}
+  .cj-cta-arrow{display:inline-flex;align-items:center;transition:transform var(--cj-dur) var(--cj-ease)}
+  .cj-herosplit-panel:hover .cj-cta-arrow{transform:translateX(6px)}
+  /* Nosotros — editorial a dos columnas sobre blanco (foto nítida, texto a la izquierda) */
+  .cj-about{background:var(--cj-white);padding-top:var(--cj-section-y);padding-bottom:var(--cj-section-y)}
+  .cj-about-grid{display:grid;grid-template-columns:1fr 0.92fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+  .cj-about-text{max-width:50ch}
+  .cj-about-lead{margin:1.8rem 0 0;font-family:var(--cj-font-display);font-weight:300;font-size:clamp(1.35rem,2.3vw,1.95rem);line-height:1.4;letter-spacing:-0.01em;color:var(--cj-ink)}
+  .cj-about-photo{position:relative;overflow:hidden;border-radius:var(--cj-radius);aspect-ratio:4/5;border:1px solid var(--cj-line);background:var(--cj-stone-100)}
+  .cj-about-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform var(--cj-dur-slow) var(--cj-ease)}
+  .cj-about:hover .cj-about-photo img{transform:scale(1.03)}
+  /* Tienda — categorías (foto + categoría FUERA de la imagen, formato editorial) */
+  .cj-catgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.2rem,2.5vw,2rem)}
+  .cj-cat{display:block;text-decoration:none;color:var(--cj-ink)}
+  .cj-cat-photo{position:relative;overflow:hidden;border-radius:var(--cj-radius);aspect-ratio:4/5;background:var(--cj-stone-100);border:1px solid var(--cj-line)}
+  .cj-cat-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform var(--cj-dur-slow) var(--cj-ease)}
+  .cj-cat-meta{padding-top:.9rem}
+  .cj-cat-name{font-family:var(--cj-font-serif);font-weight:300;font-size:1.3rem;line-height:1.2;color:var(--cj-ink)}
+  .cj-cat-subline{margin-top:.45rem;font-family:var(--cj-font-ui);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--cj-text-subtle)}
+  .cj-product-cta{display:inline-flex;align-items:center;gap:8px;margin-top:.85rem;font-family:var(--cj-font-ui);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cj-ink);transition:color var(--cj-dur-fast) var(--cj-ease)}
+  .cj-product-cta:hover{color:var(--cj-brick)}
+  /* Proyectos — tabs Por obra / Por área */
+  .cj-projtabs{display:inline-flex;gap:4px;border:1px solid var(--cj-line-strong);border-radius:999px;padding:4px}
+  .cj-projtab{font-family:var(--cj-font-ui);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:999px;border:0;background:none;cursor:pointer;color:var(--cj-text-muted);transition:background var(--cj-dur-fast) var(--cj-ease),color var(--cj-dur-fast) var(--cj-ease)}
+  .cj-projtab.is-active{background:var(--cj-ink);color:var(--cj-paper)}
+  /* Hero split (legacy) */
   .cj-hero{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(2rem,6vw,6rem);align-items:center}
   /* Generic two-column */
   .cj-two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
@@ -33,22 +72,18 @@
   .cj-burger{display:none}
   .cj-navlinks a{color:var(--cj-ink);transition:color var(--cj-dur-fast) var(--cj-ease)}
   .cj-navlinks a:hover{color:var(--cj-brick)}
-  /* Header CTA: hover con fondo rojo (ladrillo) */
   .cj-header-cta:hover{background:var(--cj-brick) !important;border-color:var(--cj-brick) !important}
-  /* Escribinos asesoramiento: botón contorno, hover se rellena claro */
   .cj-advisory-escribinos:hover{background:var(--cj-paper) !important;color:var(--cj-ink) !important;border-color:var(--cj-paper) !important}
-  /* Footer links: hover sutil */
   .cj-footer-link{transition:color var(--cj-dur-fast) var(--cj-ease)}
   .cj-footer-link:hover{color:var(--cj-brick) !important}
   @media(max-width:1040px){
     .cj-navlinks,.cj-navcta{display:none !important}
     .cj-burger{display:flex !important}
   }
-  /* Menú mobile — se despliega como cortina de arriba hacia abajo (ease-in-out) */
   @keyframes cjMenuSlideDown{from{max-height:0;opacity:.5}to{max-height:32rem;opacity:1}}
   @keyframes cjMenuSlideUp{from{max-height:32rem;opacity:1}to{max-height:0;opacity:0}}
   @keyframes cjMenuLinkIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-  .cj-mobilemenu{overflow:hidden}
+  .cj-mobilemenu{overflow:hidden;position:absolute;top:100%;left:0;right:0;z-index:35;box-shadow:0 18px 40px rgba(28,24,21,0.12)}
   .cj-mobilemenu-in{animation:cjMenuSlideDown .44s cubic-bezier(.65,0,.35,1) both}
   .cj-mobilemenu-out{animation:cjMenuSlideUp .36s cubic-bezier(.65,0,.35,1) both}
   .cj-mobilemenu-in a{opacity:0;animation:cjMenuLinkIn .4s cubic-bezier(.2,.6,.2,1) forwards}
@@ -89,31 +124,32 @@
     .cj-hero{grid-template-columns:1fr;gap:2.5rem}
     .cj-two{grid-template-columns:1fr;gap:2rem}
     .cj-advisory{grid-template-columns:1fr;gap:2rem}
+    .cj-about-grid{grid-template-columns:1fr;gap:2.5rem}
     .cj-grid3,.cj-works-b{grid-template-columns:1fr 1fr}
     .cj-works-a{grid-template-columns:1fr}
+    .cj-catgrid{grid-template-columns:1fr 1fr}
     .cj-footer{grid-template-columns:1fr 1fr}
-    .cj-service{grid-template-columns:44px 1fr auto !important;gap:16px !important}
-    .cj-service p{display:none}
+    .cj-service{grid-template-columns:1fr !important;gap:6px !important}
+    .cj-service p{display:block !important}
     .cj-navlinks,.cj-navcta{display:none !important}
     .cj-burger{display:flex !important}
   }
-  @media(max-width:560px){
-    .cj-grid3,.cj-works-b,.cj-footer{grid-template-columns:1fr}
+  @media(max-width:820px){
+    .cj-herosplit{grid-template-columns:1fr}
+    .cj-herosplit-panel{min-height:48vh}
+    .cj-herosplit-panel:first-child{border-right:0;border-bottom:1px solid rgba(243,239,230,0.16)}
   }
-  /* Hero mobile fino — que no se corte en pantallas chicas (ajustes sutiles) */
   @media(max-width:560px){
-    .cj-herofull > div:last-child{padding-top:2rem !important;padding-bottom:2rem !important}
-    .cj-herofull-title{font-size:2.7rem !important;margin-top:0.9rem !important}
-    .cj-herofull-lead{margin-top:0.9rem !important;font-size:17px !important}
-    .cj-herofull-lead--accent{font-size:19px !important}
-    .cj-herofull-cta{margin-top:1.5rem !important}
+    .cj-grid3,.cj-footer{grid-template-columns:1fr}
   }
-  /* Home / hero — mobile: texto a los bordes, botón 100%, tag sin superposición */
-  @media(max-width:900px){
-    .cj-herofull-lead{max-width:none !important}
-    .cj-herofull-cta{flex-direction:column !important;align-items:flex-start !important;gap:16px !important}
-    .cj-herofull-cta>a:first-child{width:100% !important}
-    .cj-herofull-tag{position:static !important;right:auto !important;bottom:auto !important;display:block;margin-top:1.8rem}
+  @media(max-width:640px){
+    .cj-catgrid,.cj-works-b{
+      display:flex;grid-template-columns:none;overflow-x:auto;gap:1rem;
+      scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+      padding-bottom:.6rem;scroll-padding-left:var(--cj-gutter)
+    }
+    .cj-catgrid>*,.cj-works-b>*{flex:0 0 74%;scroll-snap-align:start}
+    .cj-catgrid::-webkit-scrollbar,.cj-works-b::-webkit-scrollbar{height:0}
   }
 </style>
 </head>
@@ -123,7 +159,7 @@
 <script src="landing-app.jsx" type="text/babel" data-presets="react"></script>
 <script type="text/babel" data-presets="react">
   ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.CJApp));
-  </script>
+</script>
 <script>
   (function () {
     var lenis = null;
@@ -137,8 +173,6 @@
       function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
       requestAnimationFrame(raf);
     }
-
-    // Use la coordenada absoluta porque las anclas viven dentro de contenedores anidados.
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href^="#"]');
       if (!a) return;
@@ -147,9 +181,7 @@
       var target = document.getElementById(id.slice(1));
       if (!target) return;
       e.preventDefault();
-      var top = id === '#top'
-        ? 0
-        : target.getBoundingClientRect().top + window.scrollY - 100;
+      var top = id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - 100;
       if (lenis) lenis.scrollTo(top);
       else window.scrollTo({ top: top, behavior: 'smooth' });
       history.replaceState(null, '', id);

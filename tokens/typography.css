@@ -5,12 +5,12 @@
 :root {
   --cj-font: 'Roboto', system-ui, sans-serif;
 
-  /* back-compat aliases — both now resolve to the single Roboto family.
+  /* back-compat aliases — all resolve to the single Roboto family.
      --cj-font-serif is kept so existing components keep working; it is NOT a serif. */
   --cj-font-sans: var(--cj-font);
   --cj-font-serif: var(--cj-font);
 
-  /* semantic roles — all one family, differentiated by weight/size/tracking */
+  /* semantic roles — all one family (Roboto), differentiated by weight/size/tracking */
   --cj-font-display: var(--cj-font);   /* large editorial headlines (light weight) */
   --cj-font-eyebrow: var(--cj-font);   /* letterspaced caps labels */
   --cj-font-ui: var(--cj-font);        /* nav, buttons, meta */
