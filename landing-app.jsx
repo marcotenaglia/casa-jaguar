@@ -122,26 +122,43 @@ function Nav() {
   );
 }
 
-/* ———————————————————— HERO — Pantalla 1: dos bloques (Proyectos / Tienda) ———————————————————— */
+/* ———————————————————— HERO — Pantalla 1 ————————————————————
+   Desktop/tablet: dos bloques (Proyectos / Tienda).
+   Mobile: un solo hero (sin división) con acceso a ambas secciones vía botones. */
 function HeroSplit() {
   const panels = [
     { label: 'Proyectos', href: '#proyectos', img: PHOTO.hero2, tag: 'Interiorismo · Dirección creativa', line: 'Espacios y obras completas, pensados de principio a fin.' },
     { label: 'Tienda', href: '#tienda', img: PHOTO.lamps, tag: 'Mobiliario · Iluminación · Objetos', line: 'Piezas del estudio para comprar por unidad.' },
   ];
   return (
-    <section id="top" className="cj-herosplit">
-      {panels.map((p) => (
-        <a key={p.label} className="cj-herosplit-panel" href={p.href} aria-label={p.label}>
-          <img className="cj-herosplit-bg" src={p.img} alt={p.label} />
-          <div className="cj-herosplit-scrim" />
-          <div className="cj-herosplit-inner">
-            <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>{p.tag}</div>
-            <h2 className="cj-herosplit-title">{p.label}</h2>
-            <p className="cj-herosplit-line">{p.line}</p>
-            <span className="cj-herosplit-cta"><span className="cj-cta-label">Ver {p.label.toLowerCase()}</span><span className="cj-cta-arrow"><ArrowIcon /></span></span>
+    <section id="top">
+      <div className="cj-herosplit">
+        {panels.map((p) => (
+          <a key={p.label} className="cj-herosplit-panel" href={p.href} aria-label={p.label}>
+            <img className="cj-herosplit-bg" src={p.img} alt={p.label} />
+            <div className="cj-herosplit-scrim" />
+            <div className="cj-herosplit-inner">
+              <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>{p.tag}</div>
+              <h2 className="cj-herosplit-title">{p.label}</h2>
+              <p className="cj-herosplit-line">{p.line}</p>
+              <span className="cj-herosplit-cta"><span className="cj-cta-label">Ver {p.label.toLowerCase()}</span><span className="cj-cta-arrow"><ArrowIcon /></span></span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div className="cj-hero-mobile">
+        <img className="cj-hero-mobile-bg" src={PHOTO.hero2} alt="Casa Jaguar" />
+        <div className="cj-hero-mobile-scrim" />
+        <div className="cj-hero-mobile-inner">
+          <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>Interiorismo · Dirección creativa</div>
+          <h1 className="cj-hero-mobile-title">Espacios y piezas, pensados de principio a fin.</h1>
+          <p className="cj-hero-mobile-line">Obras completas de interiorismo, y una tienda de mobiliario, iluminación y objetos del estudio.</p>
+          <div className="cj-hero-mobile-actions">
+            <a className="cj-hero-mobile-btn cj-hero-mobile-btn--primary" href="#proyectos">Ver proyectos<span className="cj-cta-arrow"><ArrowIcon /></span></a>
+            <a className="cj-hero-mobile-btn cj-hero-mobile-btn--ghost" href="#tienda">Ver tienda<span className="cj-cta-arrow"><ArrowIcon /></span></a>
           </div>
-        </a>
-      ))}
+        </div>
+      </div>
     </section>
   );
 }
@@ -149,7 +166,7 @@ function HeroSplit() {
 /* ———————————————————————————————— MANIFESTO ———————————————————————————————— */
 function Manifesto() {
   return (
-    <section className="cj-manifesto" style={{ background: 'var(--cj-paper)', paddingTop: '13vh', paddingBottom: '13vh' }}>
+    <section className="cj-manifesto" style={{ background: 'var(--cj-paper)', paddingTop: '17vh', paddingBottom: '17vh' }}>
       <Container style={{ maxWidth: 1060, textAlign: 'center', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <p style={{ margin: '2rem 0 0', maxWidth: '43ch', width: '100%', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'clamp(1.9rem,3.4vw,2.9rem)', lineHeight: 1.18, letterSpacing: '-0.01em', color: 'var(--cj-ink)' }}>
           Pensamos el espacio como experiencia, donde intervienen todos los sentidos.
