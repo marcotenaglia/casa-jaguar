@@ -127,8 +127,8 @@ function Nav() {
    Mobile: un solo hero (sin división) con acceso a ambas secciones vía botones. */
 function HeroSplit() {
   const panels = [
-    { label: 'Proyectos', href: '#proyectos', img: PHOTO.hero2, tag: 'Interiorismo · Dirección creativa', line: 'Espacios y obras completas, pensados de principio a fin.' },
-    { label: 'Tienda', href: '#tienda', img: PHOTO.lamps, tag: 'Mobiliario · Iluminación · Objetos', line: 'Piezas del estudio para comprar por unidad.' },
+    { label: 'Proyectos', href: '#proyectos', img: PHOTO.hero2, tag: 'Interiorismo · Dirección creativa', line: 'Espacios diseñados de principio a fin, con una mirada integral.' },
+    { label: 'Tienda', href: '#tienda', img: PHOTO.lamps, tag: 'Mobiliario · Iluminación · Objetos', line: 'Mobiliario, iluminación y objetos con la firma del estudio.' },
   ];
   return (
     <section id="top">
@@ -147,17 +147,20 @@ function HeroSplit() {
         ))}
       </div>
       <div className="cj-hero-mobile">
-        <img className="cj-hero-mobile-bg" src={PHOTO.hero2} alt="Casa Jaguar" />
-        <div className="cj-hero-mobile-scrim" />
-        <div className="cj-hero-mobile-inner">
-          <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>Interiorismo · Dirección creativa</div>
-          <h1 className="cj-hero-mobile-title">Espacios y piezas, pensados de principio a fin.</h1>
-          <p className="cj-hero-mobile-line">Obras completas de interiorismo, y una tienda de mobiliario, iluminación y objetos del estudio.</p>
-          <div className="cj-hero-mobile-actions">
-            <a className="cj-hero-mobile-btn cj-hero-mobile-btn--primary" href="#proyectos">Ver proyectos<span className="cj-cta-arrow"><ArrowIcon /></span></a>
-            <a className="cj-hero-mobile-btn cj-hero-mobile-btn--ghost" href="#tienda">Ver tienda<span className="cj-cta-arrow"><ArrowIcon /></span></a>
+        <a className="cj-hmcard" href="#proyectos" aria-label="Proyectos">
+          <div className="cj-hmcard-photo"><img src={PHOTO.hero2} alt="Proyectos" /></div>
+          <div className="cj-hmcard-meta">
+            <div className="cj-eyebrow">Interiorismo · Dirección creativa</div>
+            <div className="cj-hmcard-title">Proyectos<span className="cj-cta-arrow"><ArrowIcon /></span></div>
           </div>
-        </div>
+        </a>
+        <a className="cj-hmcard" href="#tienda" aria-label="Tienda">
+          <div className="cj-hmcard-photo"><img src={PHOTO.lamps} alt="Tienda" /></div>
+          <div className="cj-hmcard-meta">
+            <div className="cj-eyebrow">Mobiliario · Iluminación · Objetos</div>
+            <div className="cj-hmcard-title">Tienda<span className="cj-cta-arrow"><ArrowIcon /></span></div>
+          </div>
+        </a>
       </div>
     </section>
   );
@@ -166,13 +169,15 @@ function HeroSplit() {
 /* ———————————————————————————————— MANIFESTO ———————————————————————————————— */
 function Manifesto() {
   return (
-    <section className="cj-manifesto" style={{ background: 'var(--cj-paper)', paddingTop: '17vh', paddingBottom: '17vh' }}>
-      <Container style={{ maxWidth: 1060, textAlign: 'center', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <p style={{ margin: '2rem 0 0', maxWidth: '43ch', width: '100%', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'clamp(1.9rem,3.4vw,2.9rem)', lineHeight: 1.18, letterSpacing: '-0.01em', color: 'var(--cj-ink)' }}>
+    <section className="cj-manifesto" style={{ position: 'relative', overflow: 'hidden', paddingTop: '17vh', paddingBottom: '17vh' }}>
+      <img className="cj-manifesto-bg" src={PHOTO.hero2} alt="" aria-hidden="true" />
+      <div className="cj-manifesto-scrim" />
+      <Container style={{ position: 'relative', maxWidth: 1060, textAlign: 'center', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <p style={{ margin: '2rem 0 0', maxWidth: '43ch', width: '100%', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'clamp(1.9rem,3.4vw,2.9rem)', lineHeight: 1.18, letterSpacing: '-0.01em', color: 'var(--cj-paper)' }}>
           Pensamos el espacio como experiencia, donde intervienen todos los sentidos.
         </p>
-        <div style={{ width: 50, height: 1, background: 'var(--cj-line-strong)', margin: '1.4rem 0' }} />
-        <p style={{ margin: '0', maxWidth: '68ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.65, color: 'var(--cj-ink-soft)' }}>
+        <div style={{ width: 50, height: 1, background: 'rgba(243,239,230,0.42)', margin: '1.4rem 0' }} />
+        <p style={{ margin: '0', maxWidth: '68ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.65, color: 'rgba(243,239,230,0.82)' }}>
           Nada es al azar: materiales, proporciones y vacíos. La composición se ajusta hasta que cada elemento encuentra su relación con el conjunto.
         </p>
       </Container>
@@ -220,12 +225,12 @@ function Projects() {
           </>
         ) : (
           <div style={{ marginTop: '3rem', border: '1px solid var(--cj-line-strong)', borderRadius: 'var(--cj-radius)', padding: 'clamp(2.5rem,6vw,4.5rem)', textAlign: 'center', background: 'var(--cj-white)' }}>
-            <div className="cj-eyebrow" style={{ color: 'var(--cj-brick)' }}>En definición</div>
+            <div className="cj-eyebrow" style={{ color: 'var(--cj-brick)' }}>Próximamente</div>
             <p style={{ margin: '1.2rem auto 0', maxWidth: '46ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h4)', lineHeight: 1.3, color: 'var(--cj-ink)' }}>
-              Estamos ordenando los proyectos por área — espacios puntuales más chicos.
+              Estamos curando esta mirada por área, para recorrer intervenciones más acotadas.
             </p>
             <p style={{ margin: '1rem auto 0', maxWidth: '52ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.6, color: 'var(--cj-ink-soft)' }}>
-              Mientras tanto, podés recorrer las obras completas desde “Por obra”.
+              Mientras tanto, explorá los proyectos completos desde «Por obra».
             </p>
           </div>
         )}
@@ -429,7 +434,7 @@ function Services() {
           <Eyebrow index="04" rule>Servicios</Eyebrow>
         </div>
         <p style={{ margin: '1.4rem 0 0', maxWidth: '40ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h4)', lineHeight: 1.32, color: 'var(--cj-ink)' }}>
-          Una mirada integral que combina arquitectura, diseño, materiales, iluminación y mobiliario, siempre al servicio de quienes habitan esos espacios.
+          Trabajamos con una mirada integral que combina arquitectura, diseño, materiales, iluminación y mobiliario, siempre al servicio de quienes habitan esos espacios.
         </p>
         <div className="cj-stagger" style={{ marginTop: '2.6rem' }}>
           {items.map(([t, d], i) => <ServiceRow key={t} n={i + 1} title={t} desc={d} />)}
