@@ -169,15 +169,13 @@ function HeroSplit() {
 /* ———————————————————————————————— MANIFESTO ———————————————————————————————— */
 function Manifesto() {
   return (
-    <section className="cj-manifesto" style={{ position: 'relative', overflow: 'hidden', paddingTop: '17vh', paddingBottom: '17vh' }}>
-      <img className="cj-manifesto-bg" src={PHOTO.hero2} alt="" aria-hidden="true" />
-      <div className="cj-manifesto-scrim" />
-      <Container style={{ position: 'relative', maxWidth: 1060, textAlign: 'center', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <p style={{ margin: '2rem 0 0', maxWidth: '43ch', width: '100%', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'clamp(1.9rem,3.4vw,2.9rem)', lineHeight: 1.18, letterSpacing: '-0.01em', color: 'var(--cj-paper)' }}>
+    <section className="cj-manifesto" style={{ background: 'var(--cj-paper)', paddingTop: '17vh', paddingBottom: '17vh' }}>
+      <Container style={{ maxWidth: 1060, textAlign: 'center', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <p style={{ margin: '2rem 0 0', maxWidth: '43ch', width: '100%', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'clamp(1.9rem,3.4vw,2.9rem)', lineHeight: 1.18, letterSpacing: '-0.01em', color: 'var(--cj-ink)' }}>
           Pensamos el espacio como experiencia, donde intervienen todos los sentidos.
         </p>
-        <div style={{ width: 50, height: 1, background: 'rgba(243,239,230,0.42)', margin: '1.4rem 0' }} />
-        <p style={{ margin: '0', maxWidth: '68ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.65, color: 'rgba(243,239,230,0.82)' }}>
+        <div style={{ width: 50, height: 1, background: 'var(--cj-line-strong)', margin: '1.4rem 0' }} />
+        <p style={{ margin: '0', maxWidth: '68ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.65, color: 'var(--cj-ink-soft)' }}>
           Nada es al azar: materiales, proporciones y vacíos. La composición se ajusta hasta que cada elemento encuentra su relación con el conjunto.
         </p>
       </Container>
@@ -226,11 +224,8 @@ function Projects() {
         ) : (
           <div style={{ marginTop: '3rem', border: '1px solid var(--cj-line-strong)', borderRadius: 'var(--cj-radius)', padding: 'clamp(2.5rem,6vw,4.5rem)', textAlign: 'center', background: 'var(--cj-white)' }}>
             <div className="cj-eyebrow" style={{ color: 'var(--cj-brick)' }}>Próximamente</div>
-            <p style={{ margin: '1.2rem auto 0', maxWidth: '46ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h4)', lineHeight: 1.3, color: 'var(--cj-ink)' }}>
-              Estamos curando esta mirada por área, para recorrer intervenciones más acotadas.
-            </p>
-            <p style={{ margin: '1rem auto 0', maxWidth: '52ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.6, color: 'var(--cj-ink-soft)' }}>
-              Mientras tanto, explorá los proyectos completos desde «Por obra».
+            <p style={{ margin: '1.2rem auto 0', maxWidth: '32ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h4)', lineHeight: 1.3, color: 'var(--cj-ink)' }}>
+              Sección en preparación.
             </p>
           </div>
         )}
@@ -398,21 +393,18 @@ function Tienda() {
 function About() {
   return (
     <section className="cj-about">
-      <Container>
-        <div className="cj-about-grid">
-          <div id="nosotros" className="cj-section-anchor cj-about-text">
-            <Eyebrow index="03" rule>Nosotros</Eyebrow>
-            <p className="cj-about-lead">
-              Somos un estudio de dirección creativa e interiorismo, especializado en la curaduría de mobiliario y objetos con materiales nobles. Diseñamos espacios singulares, con una estética única y atención al detalle en cada proyecto. Ofrecemos asesoramiento personalizado, para que tu espacio represente tu identidad y tu idea.
-            </p>
-            <div style={{ width: 50, height: 1, background: 'var(--cj-line-strong)', margin: '2rem 0 1.4rem' }} />
-            <p style={{ margin: 0, fontFamily: 'var(--cj-font-ui)', fontSize: 13, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--cj-text-subtle)' }}>
-              Sede Rosario — trabajando en todo el mundo
-            </p>
-          </div>
-          <div className="cj-about-photo">
-            <img src={PHOTO.hero2} alt="Proyecto Casa Jaguar" />
-          </div>
+      <img className="cj-about-bg" src={PHOTO.hero2} alt="" aria-hidden="true" />
+      <div className="cj-about-scrim" />
+      <Container style={{ position: 'relative' }}>
+        <div id="nosotros" className="cj-section-anchor cj-about-inner">
+          <Eyebrow index="03" rule color="rgba(243,239,230,0.6)">Nosotros</Eyebrow>
+          <p className="cj-about-lead">
+            Somos un estudio de dirección creativa e interiorismo, especializado en la curaduría de mobiliario y objetos con materiales nobles. Diseñamos espacios singulares, con una estética única y atención al detalle en cada proyecto. Ofrecemos asesoramiento personalizado, para que tu espacio represente tu identidad y tu idea.
+          </p>
+          <div style={{ width: 50, height: 1, background: 'rgba(243,239,230,0.42)', margin: '2rem auto 1.4rem' }} />
+          <p style={{ margin: 0, fontFamily: 'var(--cj-font-ui)', fontSize: 13, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(243,239,230,0.6)' }}>
+            Sede Rosario — trabajando en todo el mundo
+          </p>
         </div>
       </Container>
     </section>
