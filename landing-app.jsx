@@ -122,46 +122,26 @@ function Nav() {
   );
 }
 
-/* ———————————————————— HERO — Pantalla 1 ————————————————————
-   Desktop/tablet: dos bloques (Proyectos / Tienda).
-   Mobile: un solo hero (sin división) con acceso a ambas secciones vía botones. */
+/* ———————————————————— HERO — Pantalla 1: dos bloques (Proyectos / Tienda), apilados en mobile ———————————————————— */
 function HeroSplit() {
   const panels = [
     { label: 'Proyectos', href: '#proyectos', img: PHOTO.hero2, tag: 'Interiorismo · Dirección creativa', line: 'Espacios diseñados de principio a fin, con una mirada integral.' },
     { label: 'Tienda', href: '#tienda', img: PHOTO.lamps, tag: 'Mobiliario · Iluminación · Objetos', line: 'Mobiliario, iluminación y objetos con la firma del estudio.' },
   ];
   return (
-    <section id="top">
-      <div className="cj-herosplit">
-        {panels.map((p) => (
-          <a key={p.label} className="cj-herosplit-panel" href={p.href} aria-label={p.label}>
-            <img className="cj-herosplit-bg" src={p.img} alt={p.label} />
-            <div className="cj-herosplit-scrim" />
-            <div className="cj-herosplit-inner">
-              <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>{p.tag}</div>
-              <h2 className="cj-herosplit-title">{p.label}</h2>
-              <p className="cj-herosplit-line">{p.line}</p>
-              <span className="cj-herosplit-cta"><span className="cj-cta-label">Ver {p.label.toLowerCase()}</span><span className="cj-cta-arrow"><ArrowIcon /></span></span>
-            </div>
-          </a>
-        ))}
-      </div>
-      <div className="cj-hero-mobile">
-        <a className="cj-hmcard" href="#proyectos" aria-label="Proyectos">
-          <div className="cj-hmcard-photo"><img src={PHOTO.hero2} alt="Proyectos" /></div>
-          <div className="cj-hmcard-meta">
-            <div className="cj-eyebrow">Interiorismo · Dirección creativa</div>
-            <div className="cj-hmcard-title">Proyectos<span className="cj-cta-arrow"><ArrowIcon /></span></div>
+    <section id="top" className="cj-herosplit">
+      {panels.map((p) => (
+        <a key={p.label} className="cj-herosplit-panel" href={p.href} aria-label={p.label}>
+          <img className="cj-herosplit-bg" src={p.img} alt={p.label} />
+          <div className="cj-herosplit-scrim" />
+          <div className="cj-herosplit-inner">
+            <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>{p.tag}</div>
+            <h2 className="cj-herosplit-title">{p.label}</h2>
+            <p className="cj-herosplit-line">{p.line}</p>
+            <span className="cj-herosplit-cta"><span className="cj-cta-label">Ver {p.label.toLowerCase()}</span><span className="cj-cta-arrow"><ArrowIcon /></span></span>
           </div>
         </a>
-        <a className="cj-hmcard" href="#tienda" aria-label="Tienda">
-          <div className="cj-hmcard-photo"><img src={PHOTO.lamps} alt="Tienda" /></div>
-          <div className="cj-hmcard-meta">
-            <div className="cj-eyebrow">Mobiliario · Iluminación · Objetos</div>
-            <div className="cj-hmcard-title">Tienda<span className="cj-cta-arrow"><ArrowIcon /></span></div>
-          </div>
-        </a>
-      </div>
+      ))}
     </section>
   );
 }
@@ -453,14 +433,19 @@ function Advisory() {
   return (
     <section className="cj-contact" style={{ background: 'var(--cj-ink)', color: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
-        <div className="cj-advisory" style={{ alignItems: 'stretch', gap: 'clamp(2rem,5vw,4.5rem)' }}>
-          <div id="contacto" className="cj-section-anchor">
+        <div className="cj-advisory">
+          <div id="contacto" className="cj-section-anchor cj-advisory-intro">
             <Eyebrow index="05" rule color="rgba(243,239,230,0.6)">Contactate</Eyebrow>
             <h2 style={{ margin: '1.6rem 0 0', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.08, color: 'var(--cj-paper)' }}>Solicitá tu asesoramiento</h2>
             <p style={{ margin: '1.6rem 0 0', maxWidth: '46ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.6, color: 'rgba(243,239,230,0.78)' }}>
               Casa Jaguar desarrolla proyectos de interiorismo y dirección creativa para espacios residenciales y comerciales. Compartinos información sobre tu proyecto para conocer tus necesidades y coordinar una primera instancia de asesoramiento.
             </p>
-            <div style={{ display: 'flex', gap: 16, marginTop: '2.2rem', flexWrap: 'wrap' }}>
+          </div>
+          <div className="cj-advisory-media">
+            <img src={PHOTO.advisory} alt="Proyecto Casa Jaguar" />
+          </div>
+          <div className="cj-advisory-actions">
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <Button variant="accent" size="lg" href={FORM_URL} target="_blank" rel="noopener" icon={<ArrowIcon size={16} />} iconRight>Agendá una cita</Button>
               <Button className="cj-advisory-escribinos" variant="secondary" size="lg" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<WAIcon size={18} />} style={{ color: 'var(--cj-paper)', borderColor: 'rgba(243,239,230,0.45)' }}>Contactanos</Button>
             </div>
@@ -469,9 +454,6 @@ function Advisory() {
                 <div key={l}><div className="cj-eyebrow" style={{ fontSize: 11, color: 'rgba(243,239,230,0.5)' }}>{l}</div><div style={{ fontFamily: 'var(--cj-font-serif)', fontSize: 16, marginTop: 6, color: 'var(--cj-paper)' }}>{v}</div></div>
               ))}
             </div>
-          </div>
-          <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 'var(--cj-radius)', minHeight: 340, background: 'var(--cj-stone-100)' }}>
-            <img src={PHOTO.advisory} alt="Proyecto Casa Jaguar" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </div>
       </Container>
@@ -493,7 +475,7 @@ function Footer() {
           <FooterCol title="Contacto" items={[['Escribinos', WA_URL], [PHONE, TEL_URL], ['Agendá una cita', '#contacto']]} />
           <FooterCol title="Seguinos" items={[[IG, IG_URL]]} />
         </div>
-        <div style={{ marginTop: 'var(--cj-space-8)', paddingTop: 'var(--cj-space-5)', borderTop: '1px solid var(--cj-line)', display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+        <div className="cj-footer-legal" style={{ marginTop: 'var(--cj-space-8)', paddingTop: 'var(--cj-space-5)', borderTop: '1px solid var(--cj-line)', display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
           <span style={{ fontFamily: 'var(--cj-font-ui)', fontSize: 12, letterSpacing: '0.04em', color: 'var(--cj-text-subtle)' }}>© {new Date().getFullYear()} Casa Jaguar · Rosario, Argentina</span>
           <span style={{ fontFamily: 'var(--cj-font-ui)', fontSize: 12, letterSpacing: '0.04em', color: 'var(--cj-text-subtle)' }}>Interiorismo &amp; dirección creativa</span>
         </div>
