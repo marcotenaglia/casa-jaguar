@@ -55,10 +55,22 @@
   .cj-cat-subline{margin-top:.45rem;font-family:var(--cj-font-ui);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--cj-text-subtle)}
   .cj-product-cta{display:inline-flex;align-items:center;gap:8px;margin-top:.85rem;font-family:var(--cj-font-ui);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cj-ink);transition:color var(--cj-dur-fast) var(--cj-ease)}
   .cj-product-cta:hover{color:var(--cj-brick)}
-  /* Proyectos — tabs Por obra / Por área */
-  .cj-projtabs{display:inline-flex;gap:4px;border:1px solid var(--cj-line-strong);border-radius:999px;padding:4px}
-  .cj-projtab{font-family:var(--cj-font-ui);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:999px;border:0;background:none;cursor:pointer;color:var(--cj-text-muted);transition:background var(--cj-dur-fast) var(--cj-ease),color var(--cj-dur-fast) var(--cj-ease)}
-  .cj-projtab.is-active{background:var(--cj-ink);color:var(--cj-paper)}
+  /* Tienda — drill-down categoría → productos (misma grilla) + animación fade-up */
+  button.cj-cat{border:0;background:none;padding:0;margin:0;font:inherit;text-align:left;width:100%;cursor:pointer;color:var(--cj-ink)}
+  .cj-shop-view{animation:cjFade .5s cubic-bezier(.2,.6,.2,1) both}
+  .cj-shop-back{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:6px 0;margin-bottom:1.4rem;font-family:var(--cj-font-ui);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--cj-text-subtle);cursor:pointer;transition:color var(--cj-dur-fast) var(--cj-ease)}
+  .cj-shop-back:hover{color:var(--cj-brick)}
+  .cj-shop-back span{font-size:15px;line-height:1;transition:transform var(--cj-dur) var(--cj-ease)}
+  .cj-shop-back:hover span{transform:translateX(-4px)}
+  .cj-shop-enter>*{opacity:0;animation:cjHeroUp .6s cubic-bezier(.2,.6,.2,1) forwards}
+  .cj-shop-enter>*:nth-child(1){animation-delay:.03s}
+  .cj-shop-enter>*:nth-child(2){animation-delay:.09s}
+  .cj-shop-enter>*:nth-child(3){animation-delay:.15s}
+  .cj-shop-enter>*:nth-child(4){animation-delay:.21s}
+  .cj-shop-enter>*:nth-child(5){animation-delay:.27s}
+  .cj-shop-enter>*:nth-child(6){animation-delay:.33s}
+  .cj-shop-enter>*:nth-child(7){animation-delay:.39s}
+  .cj-shop-enter>*:nth-child(8){animation-delay:.45s}
   /* Hero split (legacy) */
   .cj-hero{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(2rem,6vw,6rem);align-items:center}
   /* Generic two-column */
@@ -114,7 +126,8 @@
   .cj-wordblock.in .cj-word{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){
     .cj-reveal,.cj-stagger>*,.cj-word{opacity:1 !important;transform:none !important;transition:none !important}
-    .cj-hero-in>*{animation:none !important}
+    .cj-hero-in>*,.cj-shop-view,.cj-shop-back{animation:none !important}
+    .cj-shop-enter>*{opacity:1 !important;transform:none !important;animation:none !important}
   }
   .cj-lbarrow:hover{background:rgba(160,42,32,0.85) !important}
   .cj-section-anchor{scroll-margin-top:100px}

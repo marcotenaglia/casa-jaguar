@@ -1,9 +1,9 @@
 /* Casa Jaguar — Typography
-   ONE corporate typeface: ROBOTO (client's updated direction — supersedes the
+   ONE corporate typeface: RUBIK (client's updated direction — supersedes the
    manual's Creato spec). Loaded from Google Fonts in tokens/fonts.css.
    Hierarchy is built from WEIGHT + SIZE + wide tracking, not from a second family. */
 :root {
-  --cj-font: 'Roboto', system-ui, sans-serif;
+  --cj-font: 'Rubik', system-ui, sans-serif;
 
   /* back-compat aliases — all resolve to the single Roboto family.
      --cj-font-serif is kept so existing components keep working; it is NOT a serif. */

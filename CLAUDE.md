@@ -39,7 +39,7 @@ misma carpeta.
 ## 4. Identidad / marca
 
 - **Fuente de verdad de marca:** `uploads/Casa Jaguar-Manual de marca_compressed.pdf` (Manual de identidad, 25 pp).
-- **Tipografía:** **Roboto** (Google Fonts) — decisión actualizada del cliente que reemplaza a Creato del manual. Una sola familia; jerarquía por peso + tamaño + tracking amplio. Ver `tokens/fonts.css`.
+- **Tipografía:** **Rubik** (Google Fonts) — decisión actualizada del cliente que reemplaza a Creato del manual (antes fue Roboto). Una sola familia; jerarquía por peso + tamaño + tracking amplio. Ver `tokens/fonts.css` y `tokens/typography.css` (`--cj-font`, fuente única de verdad).
 - **Logotipo cursivo "casa jaguar"** = marca principal, es **vector (SVG)**, no fuente. Archivos en `assets/brand/`: `logotipo.svg` (rojo), `logotipo-cream.svg` (negativo), `logotipo-ink.svg`. Renderizado por el componente `Wordmark`.
 - **Emblema** = logotipo en círculo (`logotipo-emblem.svg` + `-neg`) para uso compacto.
 - **Jaguar de línea / isologo:** NO se usa por ahora (existe `isologo-jaguar.png` pero se evita hasta tener SVG limpio; prohibidos recortes borrosos de IG).
@@ -73,9 +73,9 @@ Secciones: **Nav → HeroSplit → Manifiesto → Proyectos → Tienda → Nosot
 
 - **Nav:** 3 ítems — **Proyectos · Tienda · Contactate** (+ logo sin cambios + CTA WhatsApp "Escribinos").
 - **HeroSplit (Pantalla 1):** dos bloques de igual jerarquía, foto + link — **Proyectos** (`#proyectos`) y **Tienda** (`#tienda`). Reemplazó al hero full-bleed. Costavía ya NO vive en la home.
-- **Proyectos:** toggle **Por obra / Por área**. Por obra: `Lab de Juju`, `Maximalismo Latino`, `Edificio Costavía` (+ "Próximamente · México · Milán"). Por área: placeholder "En definición" (pendiente interno del cliente). Galería con lightbox. ⚠️ Fotos = placeholders hasta recibir material real.
-- **Tienda:** 8 categorías con **formato de card editorial** (foto limpia + nombre en serif + subcategorías como línea fina en mayúsculas debajo — NO píldoras sobre la imagen; cada card linkea a WhatsApp vía `waCategory(name)`). Categorías: Iluminación (Colgante·Piso·Mesa·Aplique), Sillas, Sillones, Mesas, Bibliotecas, Camas y Camastros, Alfombras, Accesorios (Portavelas·Mantelería·Bazar chico). En mobile las categorías son **slider horizontal**. La sección "Piezas destacadas" (`ProductCard` + `waProduct` + botón "Consultar disponibilidad") está **oculta por ahora** (código presente, a validar con cliente si suman destacados). ⚠️ Todas las fotos = placeholders de `assets/photos/` (criterio: [[placeholder-photos-everywhere]]).
-- **Nosotros:** banda con foto blurreada de fondo + texto final del cliente + "Sede Rosario — trabajando en todo el mundo". (Antes se llamaba "El estudio".)
+- **Proyectos:** sección simple (se quitó el toggle Por obra / Por área para simplificar la navegación). Obras: `Lab de Juju`, `Edificio Costavía`. Galería con lightbox. (Se quitaron `Maximalismo Latino` y el pie "Próximamente · México · Milán".) ⚠️ Fotos = placeholders hasta recibir material real.
+- **Tienda:** 8 categorías con **formato de card editorial** (foto limpia + nombre + subcategorías como línea fina en mayúsculas debajo). **Drill-down:** al tocar una categoría se muestran sus **productos** dentro de la misma sección, con la **misma grilla** (`CategoryTile` = botón que abre; `ProductTile` = misma estética, linkea a WhatsApp vía `waProduct(name)`); botón **"Volver"** + animación fade-up (`cj-shop-enter`/`cj-shop-view`). Categorías: Iluminación (Colgante·Piso·Mesa·Aplique), Sillas, Sillones, Mesas, Bibliotecas, Camas y Camastros, Alfombras, Accesorios (Portavelas·Mantelería·Bazar chico). **Estructura lista para WordPress:** `CATEGORIES` = array de `{ name, subs, img, products:[{ name, sub, img }] }` — al migrar se reemplaza por datos del CMS sin tocar la UI. Productos = **muestras estáticas** (fotos reutilizadas de `assets/photos/`). En mobile las grillas son **slider horizontal**. (Se quitó el título "Piezas para comprar por unidad".) ⚠️ Fotos = placeholders (criterio: [[placeholder-photos-everywhere]]).
+- **Nosotros:** banda con foto blurreada de fondo + texto final del cliente + "Trabajamos en todo el mundo". (Antes se llamaba "El estudio".)
 - **Servicios:** copy nuevo del cliente — Interiorismo, Remodelaciones, Home Staging, Asesoría de diseño online. Se quitó el tagline genérico "se adapta a todos los espacios y presupuestos".
 - **Asesoramiento/Contacto:** heading "Agendá una cita" + botones Formulario (Google Form) y WhatsApp ("Contactanos"). Se quitó **Dirección y Horarios** (solo quedan Teléfono + Instagram).
 - **WhatsApp:** ícono oficial (`assets/brand/whatsapp.svg`), botón fijo en el header. El flotante (`WhatsAppFab`) está definido pero no montado.
@@ -101,11 +101,10 @@ Secciones: **Nav → HeroSplit → Manifiesto → Proyectos → Tienda → Nosot
 
 ## 11. Pendientes reales (de Lucía / Casa Jaguar)
 
-1. **Fotos reales de las obras** `Lab de Juju` y `Maximalismo Latino` (hoy usan placeholders de `assets/photos/`).
-2. **Catálogo real de Tienda**: para cada producto → foto + nombre + categoría/subcategoría. Hoy hay 3 piezas de muestra.
-3. **Proyectos "Por área"**: definir qué espacios puntuales entran (marcado "pendiente interno" por el cliente).
-4. Decidir si algún día se usa el jaguar isologo (necesita SVG limpio).
-5. Confirmar próximas obras (México, Milán) cuando tengan material.
+1. **Fotos reales de las obras** `Lab de Juju` y `Edificio Costavía` (hoy usan placeholders de `assets/photos/`).
+2. **Catálogo real de Tienda**: para cada categoría → sus productos con foto + nombre + subcategoría. Hoy hay muestras estáticas por categoría (drill-down); falta reemplazar por el catálogo real (destino: administrable desde WordPress con la estructura `CATEGORIES`).
+3. Decidir si algún día se usa el jaguar isologo (necesita SVG limpio).
+4. Confirmar próximas obras (México, Milán) cuando tengan material (por ahora no se muestran en el sitio).
 
 ## 12. Decisión de arquitectura pendiente
 

@@ -50,7 +50,6 @@ const ADDRESS = 'Urquiza 1558, Rosario, Santa Fe';
 const HOURS = 'Lun a Vie 10–18 · Sáb 10–13';
 // Botón de ficha de producto → WhatsApp con la consulta ya escrita, identificando la pieza.
 const waProduct = (name) => WA_URL + '?text=' + encodeURIComponent('Hola, quiero consultar por ' + name + '.');
-const waCategory = (name) => WA_URL + '?text=' + encodeURIComponent('Hola, quiero ver ' + name + ' de la tienda.');
 
 const Container = ({ children, style }) => (
   <div style={{ maxWidth: 'var(--cj-max-w)', margin: '0 auto', paddingLeft: 'var(--cj-gutter)', paddingRight: 'var(--cj-gutter)', ...style }}>{children}</div>
@@ -169,46 +168,22 @@ function Manifesto() {
    la home a esta sección, según el feedback. */
 const OBRAS = [
   { title: 'Lab de Juju', cat: 'Obra', cover: PHOTO.shelf, images: [PHOTO.shelf, PHOTO.lamps, PHOTO.wood, PHOTO.hero2] },
-  { title: 'Maximalismo Latino', cat: 'Obra', cover: PHOTO.nook, images: [PHOTO.nook, PHOTO.kitchen, PHOTO.daylight, PHOTO.extra] },
   { title: 'Edificio Costavía', cat: 'Comercial', cover: PHOTO.hero, images: [PHOTO.hero, PHOTO.daylight, PHOTO.kitchen, PHOTO.extra] },
 ];
-const PROXIMAS = ['México', 'Milán'];
 
 function Projects() {
   const [open, setOpen] = useState(-1);
-  const [mode, setMode] = useState('obra');
   const idxOf = (p) => OBRAS.indexOf(p);
   return (
     <section className="cj-projects" style={{ background: 'var(--cj-white)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 24, flexWrap: 'wrap' }}>
-          <div id="proyectos" className="cj-section-anchor">
-            <Eyebrow index="01" rule>Proyectos</Eyebrow>
-            <h2 style={{ margin: '1.4rem 0 0', maxWidth: '20ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.1, color: 'var(--cj-ink)' }}>Espacios en transformación</h2>
-          </div>
-          <div className="cj-projtabs" role="tablist" aria-label="Formas de navegar los proyectos">
-            <button className={'cj-projtab' + (mode === 'obra' ? ' is-active' : '')} onClick={() => setMode('obra')} role="tab" aria-selected={mode === 'obra'}>Por obra</button>
-            <button className={'cj-projtab' + (mode === 'area' ? ' is-active' : '')} onClick={() => setMode('area')} role="tab" aria-selected={mode === 'area'}>Por área</button>
-          </div>
+        <div id="proyectos" className="cj-section-anchor">
+          <Eyebrow index="01" rule>Proyectos</Eyebrow>
+          <h2 style={{ margin: '1.4rem 0 0', maxWidth: '20ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.1, color: 'var(--cj-ink)' }}>Espacios en transformación</h2>
         </div>
-
-        {mode === 'obra' ? (
-          <>
-            <div className="cj-works-b" style={{ marginTop: '3rem' }}>
-              {OBRAS.map((p) => <WorkTile key={p.title} p={p} ratio="4 / 5" overlay onOpen={() => setOpen(idxOf(p))} />)}
-            </div>
-            <p style={{ marginTop: '2rem', fontFamily: 'var(--cj-font-ui)', fontSize: 12, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--cj-text-subtle)' }}>
-              Próximamente · {PROXIMAS.join(' · ')}
-            </p>
-          </>
-        ) : (
-          <div style={{ marginTop: '3rem', border: '1px solid var(--cj-line-strong)', borderRadius: 'var(--cj-radius)', padding: 'clamp(2.5rem,6vw,4.5rem)', textAlign: 'center', background: 'var(--cj-white)' }}>
-            <div className="cj-eyebrow" style={{ color: 'var(--cj-brick)' }}>Próximamente</div>
-            <p style={{ margin: '1.2rem auto 0', maxWidth: '32ch', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h4)', lineHeight: 1.3, color: 'var(--cj-ink)' }}>
-              Sección en preparación.
-            </p>
-          </div>
-        )}
+        <div className="cj-works-b" style={{ marginTop: '3rem' }}>
+          {OBRAS.map((p) => <WorkTile key={p.title} p={p} ratio="4 / 5" overlay onOpen={() => setOpen(idxOf(p))} />)}
+        </div>
       </Container>
       {open > -1 ? <Lightbox project={OBRAS[open]} onClose={() => setOpen(-1)} /> : null}
     </section>
@@ -288,48 +263,92 @@ function Lightbox({ project, onClose }) {
 }
 
 /* ————————————————————————————————— TIENDA ————————————————————————————————— */
-/* Categorías definidas por el cliente. Iluminación y Accesorios mantienen subcategorías.
-   Los productos de muestra son placeholders hasta recibir el catálogo real (foto + nombre
-   + categoría) de Lucía; el patrón de ficha (botón → WhatsApp con la consulta escrita) ya
-   queda funcionando. */
+/* ESTRUCTURA LISTA PARA WORDPRESS (hoy estática; luego administrable).
+   Cada categoría = { name, subs, img, products }. Cada producto = { name, sub, img }.
+     · name  → título editable de la categoría/producto.
+     · subs  → subcategorías de la categoría (línea fina en mayúsculas).
+     · sub   → subcategoría/variante/modelo del producto (misma línea fina).
+     · img   → ruta a la imagen (hoy fotos reutilizadas de assets/photos = placeholders).
+   Al migrar a WordPress, este array se reemplaza por los datos del CMS
+   (categorías = términos/colecciones; productos = entradas con campos ACF: nombre,
+   sub, imagen). La UI (grilla, drill-down y animación) no cambia.
+   Comportamiento: al tocar una categoría se muestran sus productos DENTRO de la misma
+   sección, con la MISMA grilla editorial; "Volver" regresa a las categorías. Cada
+   producto linkea a WhatsApp con la consulta ya escrita (waProduct). */
+const PH = (n) => A + '/photos/' + n;
 const CATEGORIES = [
-  { name: 'Iluminación', subs: ['Colgante', 'Piso', 'Mesa', 'Aplique'], img: A + '/photos/p-lamps-paper.webp' },
-  { name: 'Sillas', subs: [], img: A + '/photos/p-dining-wishbone.webp' },
-  { name: 'Sillones', subs: [], img: A + '/photos/p-sofa-striped.webp' },
-  { name: 'Mesas', subs: [], img: A + '/photos/p-dining-wood.webp' },
-  { name: 'Bibliotecas', subs: [], img: A + '/photos/p-living-shelf.webp' },
-  { name: 'Camas y Camastros', subs: [], img: A + '/photos/p-curtain-nook.webp' },
-  { name: 'Alfombras', subs: [], img: A + '/photos/p-sofa-grey.webp' },
-  { name: 'Accesorios', subs: ['Portavelas', 'Mantelería', 'Bazar chico'], img: A + '/photos/p-kitchen-round.webp' },
-];
-const SAMPLE_PRODUCTS = [
-  { img: PHOTO.lamps, cat: 'Iluminación · Colgante', name: 'Lámpara colgante tejida' },
-  { img: PHOTO.wood, cat: 'Mesas', name: 'Mesa de madera a medida' },
-  { img: PHOTO.shelf, cat: 'Bibliotecas', name: 'Biblioteca abierta' },
+  {
+    name: 'Iluminación', subs: ['Colgante', 'Piso', 'Mesa', 'Aplique'], img: PH('p-lamps-paper.webp'),
+    products: [
+      { name: 'Colgante tejida', sub: 'Colgante', img: PH('p-lamps-paper.webp') },
+      { name: 'Lámpara de pie', sub: 'Piso', img: PH('real-lamps.webp') },
+      { name: 'Velador cerámico', sub: 'Mesa', img: PH('real-hero-lamp.webp') },
+      { name: 'Aplique de bronce', sub: 'Aplique', img: PH('real-desk-shelf.webp') },
+    ],
+  },
+  {
+    name: 'Sillas', subs: [], img: PH('p-dining-wishbone.webp'),
+    products: [
+      { name: 'Silla Wishbone', sub: 'Comedor', img: PH('p-dining-wishbone.webp') },
+      { name: 'Silla de madera', sub: 'Comedor', img: PH('real-wood.webp') },
+      { name: 'Silla tapizada', sub: 'Living', img: PH('real-dining-shelf.webp') },
+    ],
+  },
+  {
+    name: 'Sillones', subs: [], img: PH('p-sofa-striped.webp'),
+    products: [
+      { name: 'Sillón rayado', sub: 'Dos cuerpos', img: PH('p-sofa-striped.webp') },
+      { name: 'Sillón lino gris', sub: 'Tres cuerpos', img: PH('p-sofa-grey.webp') },
+      { name: 'Butaca individual', sub: 'Individual', img: PH('real-extra.webp') },
+    ],
+  },
+  {
+    name: 'Mesas', subs: [], img: PH('p-dining-wood.webp'),
+    products: [
+      { name: 'Mesa de comedor', sub: 'Comedor', img: PH('p-dining-wood.webp') },
+      { name: 'Mesa a medida', sub: 'Comedor', img: PH('real-wood.webp') },
+      { name: 'Mesa auxiliar', sub: 'Auxiliar', img: PH('p-kitchen-round.webp') },
+    ],
+  },
+  {
+    name: 'Bibliotecas', subs: [], img: PH('p-living-shelf.webp'),
+    products: [
+      { name: 'Biblioteca abierta', sub: 'Modular', img: PH('p-living-shelf.webp') },
+      { name: 'Estantería de pared', sub: 'Pared', img: PH('real-shelf.webp') },
+      { name: 'Repisa de madera', sub: 'Auxiliar', img: PH('real-dining-shelf.webp') },
+    ],
+  },
+  {
+    name: 'Camas y Camastros', subs: [], img: PH('p-curtain-nook.webp'),
+    products: [
+      { name: 'Cama con dosel', sub: 'Matrimonial', img: PH('p-curtain-nook.webp') },
+      { name: 'Camastro de mimbre', sub: 'Exterior', img: PH('real-wicker.webp') },
+      { name: 'Respaldo tapizado', sub: 'Individual', img: PH('real-hero.webp') },
+    ],
+  },
+  {
+    name: 'Alfombras', subs: [], img: PH('p-sofa-grey.webp'),
+    products: [
+      { name: 'Alfombra natural', sub: 'Living', img: PH('p-sofa-grey.webp') },
+      { name: 'Alfombra tejida', sub: 'Dormitorio', img: PH('real-balcony.webp') },
+      { name: 'Camino de fibra', sub: 'Pasillo', img: PH('real-extra.webp') },
+    ],
+  },
+  {
+    name: 'Accesorios', subs: ['Portavelas', 'Mantelería', 'Bazar chico'], img: PH('p-kitchen-round.webp'),
+    products: [
+      { name: 'Portavelas de cerámica', sub: 'Portavelas', img: PH('p-kitchen-round.webp') },
+      { name: 'Individuales de lino', sub: 'Mantelería', img: PH('real-kitchen.webp') },
+      { name: 'Bazar chico', sub: 'Bazar chico', img: PH('real-advisory.webp') },
+    ],
+  },
 ];
 
-function ProductCard({ img, cat, name }) {
+/* Ficha de categoría → botón que abre los productos de esa categoría (drill-down). */
+function CategoryTile({ name, subs, img, onOpen }) {
   const [h, setH] = useState(false);
   return (
-    <div onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
-      <div className="cj-photo" style={{ aspectRatio: '4 / 5', overflow: 'hidden', borderRadius: 'var(--cj-radius)', background: 'var(--cj-stone-100)', border: '1px solid var(--cj-line)' }}>
-        <img src={img} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: h ? 'scale(1.04)' : 'scale(1)', transition: 'transform var(--cj-dur-slow) var(--cj-ease)' }} />
-      </div>
-      <div style={{ paddingTop: '0.9rem' }}>
-        <Eyebrow style={{ fontSize: '0.6875rem' }}>{cat}</Eyebrow>
-        <div style={{ fontFamily: 'var(--cj-font-serif)', fontWeight: 300, fontSize: '1.3rem', lineHeight: 1.2, color: 'var(--cj-ink)', marginTop: 6 }}>{name}</div>
-        <a className="cj-product-cta" href={waProduct(name)} target="_blank" rel="noopener noreferrer">
-          <WAIcon size="1.15em" /> Consultar disponibilidad
-        </a>
-      </div>
-    </div>
-  );
-}
-
-function CategoryTile({ name, subs, img }) {
-  const [h, setH] = useState(false);
-  return (
-    <a className="cj-cat" href={waCategory(name)} target="_blank" rel="noopener noreferrer" aria-label={'Categoría ' + name}
+    <button type="button" className="cj-cat" onClick={onOpen} aria-label={'Ver ' + name}
       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
       <div className="cj-cat-photo">
         <img src={img} alt={name} style={{ transform: h ? 'scale(1.04)' : 'scale(1)' }} />
@@ -338,18 +357,40 @@ function CategoryTile({ name, subs, img }) {
         <div className="cj-cat-name">{name}</div>
         {subs.length ? <div className="cj-cat-subline">{subs.join(' · ')}</div> : null}
       </div>
+    </button>
+  );
+}
+
+/* Ficha de producto → misma grilla/estética que la categoría; linkea a WhatsApp. */
+function ProductTile({ name, sub, img }) {
+  const [h, setH] = useState(false);
+  return (
+    <a className="cj-cat" href={waProduct(name)} target="_blank" rel="noopener noreferrer" aria-label={'Consultar ' + name}
+      onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
+      <div className="cj-cat-photo">
+        <img src={img} alt={name} style={{ transform: h ? 'scale(1.04)' : 'scale(1)' }} />
+      </div>
+      <div className="cj-cat-meta">
+        <div className="cj-cat-name">{name}</div>
+        {sub ? <div className="cj-cat-subline">{sub}</div> : null}
+      </div>
     </a>
   );
 }
 
 function Tienda() {
+  const [openCat, setOpenCat] = useState(null);
+  const [touched, setTouched] = useState(false);
+  const openCategory = (name) => { setOpenCat(name); setTouched(true); };
+  const back = () => { setOpenCat(null); setTouched(true); };
+  const current = CATEGORIES.find((c) => c.name === openCat);
+  const gridCls = 'cj-catgrid' + (touched ? ' cj-shop-enter' : '');
   return (
     <section className="cj-tienda" style={{ background: 'var(--cj-paper)', paddingTop: 'var(--cj-section-y)', paddingBottom: 'var(--cj-section-y)' }}>
       <Container>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 24, flexWrap: 'wrap' }}>
           <div id="tienda" className="cj-section-anchor" style={{ maxWidth: '58ch' }}>
             <Eyebrow index="02" rule>Tienda</Eyebrow>
-            <h2 style={{ margin: '1.4rem 0 0', fontFamily: 'var(--cj-font-display)', fontWeight: 300, fontSize: 'var(--cj-t-h2)', lineHeight: 1.1, color: 'var(--cj-ink)' }}>Piezas para comprar por unidad</h2>
             <p style={{ margin: '1.2rem 0 0', maxWidth: '54ch', fontSize: 'var(--cj-t-body)', lineHeight: 1.6, color: 'var(--cj-ink-soft)' }}>
               Mobiliario, iluminación y objetos seleccionados del estudio. Consultá disponibilidad por WhatsApp; entrega coordinada en Rosario.
             </p>
@@ -357,13 +398,24 @@ function Tienda() {
           <Button variant="ghost" href={WA_URL} target="_blank" rel="noopener noreferrer" icon={<ArrowIcon size={16} />} iconRight>Escribinos para ver opciones</Button>
         </div>
 
-        <div className="cj-catgrid" style={{ marginTop: '3rem' }}>
-          {CATEGORIES.map((c) => <CategoryTile key={c.name} name={c.name} subs={c.subs} img={c.img} />)}
-        </div>
-
-        {/* "Piezas destacadas" oculto por pedido (a validar con cliente si quieren una sección
-            de destacados más adelante). El patrón de ficha con "Consultar disponibilidad"
-            (ProductCard + waProduct) queda en el código para el catálogo real. */}
+        {current ? (
+          <div key={'cat-' + current.name} className="cj-shop-view" style={{ marginTop: '3rem' }}>
+            <button type="button" className="cj-shop-back" onClick={back}>
+              <span aria-hidden="true">←</span> Volver
+            </button>
+            <div className="cj-shop-head">
+              <div className="cj-cat-name" style={{ fontSize: '1.6rem' }}>{current.name}</div>
+              {current.subs.length ? <div className="cj-cat-subline" style={{ marginTop: '0.5rem' }}>{current.subs.join(' · ')}</div> : null}
+            </div>
+            <div className={gridCls} style={{ marginTop: '1.6rem' }}>
+              {current.products.map((p) => <ProductTile key={p.name} name={p.name} sub={p.sub} img={p.img} />)}
+            </div>
+          </div>
+        ) : (
+          <div className={gridCls} style={{ marginTop: '3rem' }}>
+            {CATEGORIES.map((c) => <CategoryTile key={c.name} name={c.name} subs={c.subs} img={c.img} onOpen={() => openCategory(c.name)} />)}
+          </div>
+        )}
       </Container>
     </section>
   );
@@ -383,7 +435,7 @@ function About() {
           </p>
           <div style={{ width: 50, height: 1, background: 'rgba(243,239,230,0.42)', margin: '2rem auto 1.4rem' }} />
           <p style={{ margin: 0, fontFamily: 'var(--cj-font-ui)', fontSize: 13, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(243,239,230,0.6)' }}>
-            Sede Rosario — trabajando en todo el mundo
+            Trabajamos en todo el mundo
           </p>
         </div>
       </Container>
@@ -469,7 +521,7 @@ function Footer() {
         <div className="cj-footer">
           <div style={{ maxWidth: 340 }}>
             <a href="#top" aria-label="Casa Jaguar — inicio" style={{ display: 'inline-block' }}><img src={LOGOTIPO} alt="Casa Jaguar" style={{ height: 44, width: 'auto', display: 'block' }} /></a>
-            <p style={{ margin: '1.4rem 0 0', fontSize: 'var(--cj-t-body-sm)', lineHeight: 1.6, color: 'var(--cj-ink-soft)' }}>Estudio de interiorismo y dirección creativa. Sede Rosario — trabajando en todo el mundo.</p>
+            <p style={{ margin: '1.4rem 0 0', fontSize: 'var(--cj-t-body-sm)', lineHeight: 1.6, color: 'var(--cj-ink-soft)' }}>Estudio de interiorismo y dirección creativa. Trabajamos en todo el mundo.</p>
           </div>
           <FooterCol title="Navegación" items={[['Proyectos', '#proyectos'], ['Tienda', '#tienda'], ['Nosotros', '#nosotros'], ['Contacto', '#contacto']]} />
           <FooterCol title="Contacto" items={[['Escribinos', WA_URL], [PHONE, TEL_URL], ['Agendá una cita', '#contacto']]} />
