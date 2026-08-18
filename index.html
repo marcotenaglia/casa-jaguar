@@ -58,10 +58,11 @@
   /* Tienda — drill-down categoría → productos (misma grilla) + animación fade-up */
   button.cj-cat{display:flex;flex-direction:column;border:0;background:none;padding:0;margin:0;font:inherit;text-align:left;width:100%;cursor:pointer;color:var(--cj-ink)}
   .cj-shop-view{animation:cjFade .5s cubic-bezier(.2,.6,.2,1) both}
-  .cj-shop-back{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:6px 0;margin-bottom:1.4rem;font-family:var(--cj-font-ui);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--cj-text-subtle);cursor:pointer;transition:color var(--cj-dur-fast) var(--cj-ease)}
+  .cj-shop-head-row{display:flex;justify-content:space-between;align-items:center;gap:24px}
+  .cj-shop-back{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:0;font-family:var(--cj-font-ui);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--cj-text-subtle);cursor:pointer;white-space:nowrap;transition:color var(--cj-dur-fast) var(--cj-ease)}
   .cj-shop-back:hover{color:var(--cj-brick)}
-  .cj-shop-back span{font-size:15px;line-height:1;transition:transform var(--cj-dur) var(--cj-ease)}
-  .cj-shop-back:hover span{transform:translateX(-4px)}
+  .cj-shop-back-arrow{display:inline-flex;transform:scaleX(-1);transition:transform var(--cj-dur) var(--cj-ease)}
+  .cj-shop-back:hover .cj-shop-back-arrow{transform:scaleX(-1) translateX(4px)}
   .cj-shop-enter>*{opacity:0;animation:cjHeroUp .6s cubic-bezier(.2,.6,.2,1) forwards}
   .cj-shop-enter>*:nth-child(1){animation-delay:.03s}
   .cj-shop-enter>*:nth-child(2){animation-delay:.09s}

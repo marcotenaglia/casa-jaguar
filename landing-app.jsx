@@ -400,11 +400,13 @@ function Tienda() {
 
         {current ? (
           <div key={'cat-' + current.name} className="cj-shop-view" style={{ marginTop: '3rem' }}>
-            <button type="button" className="cj-shop-back" onClick={back}>
-              <span aria-hidden="true">←</span> Volver
-            </button>
             <div className="cj-shop-head">
-              <div className="cj-cat-name" style={{ fontSize: '1.6rem' }}>{current.name}</div>
+              <div className="cj-shop-head-row">
+                <div className="cj-cat-name" style={{ fontSize: '1.6rem' }}>{current.name}</div>
+                <button type="button" className="cj-shop-back" onClick={back}>
+                  <span className="cj-shop-back-arrow" aria-hidden="true"><ArrowIcon size={16} /></span> Volver
+                </button>
+              </div>
               {current.subs.length ? <div className="cj-cat-subline" style={{ marginTop: '0.5rem' }}>{current.subs.join(' · ')}</div> : null}
             </div>
             <div className={gridCls} style={{ marginTop: '1.6rem' }}>
