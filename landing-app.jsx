@@ -262,6 +262,7 @@ function Projects() {
               </div>
               <div className="cj-cat-subline" style={{ marginTop: '0.5rem' }}>{current.cat}</div>
             </div>
+            <p className="cj-project-desc">{current.desc}</p>
             <div className={gridCls} style={{ marginTop: '1.8rem' }}>
               {current.images.map((src, k) => (
                 <button key={k} type="button" className="cj-gallery-item" onClick={() => setLb(k)} aria-label={`Ampliar foto ${k + 1} de ${current.title}`}>
@@ -269,7 +270,6 @@ function Projects() {
                 </button>
               ))}
             </div>
-            <p className="cj-project-desc">{current.desc}</p>
           </div>
         ) : (
           <div className={'cj-works-b' + (touched ? ' cj-shop-enter' : '')} style={{ marginTop: '3rem' }}>
