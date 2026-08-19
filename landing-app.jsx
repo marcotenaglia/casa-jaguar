@@ -122,59 +122,19 @@ function Nav() {
 }
 
 /* ———————————————————— HERO — Pantalla 1: dos bloques (Proyectos / Tienda), apilados en mobile ————————————————————
-   Cada bloque es un SLIDER: carrusel horizontal con autoplay (~3s) e infinite loop
-   (clona la 1ª foto al final y salta sin transición → loop sin corte). Los textos y el
-   CTA quedan FIJOS; solo se desliza la banda de fotos. Puntos indicadores para que se
-   lea claramente como slider (sobre todo en mobile). Respeta prefers-reduced-motion. */
-function HeroSlider({ imgs, offset = 0 }) {
-  const n = imgs.length;
-  const slides = React.useMemo(() => (n > 1 ? imgs.concat(imgs[0]) : imgs), [imgs]);
-  const [i, setI] = useState(0);
-  const [animate, setAnimate] = useState(true);
-  useEffect(() => {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce || n < 2) return;
-    let interval;
-    const startTO = setTimeout(() => { interval = setInterval(() => setI((v) => v + 1), 3000); }, offset);
-    return () => { clearTimeout(startTO); if (interval) clearInterval(interval); };
-  }, [n, offset]);
-  // Al llegar al clon (i === n), reponer al 0 real SIN transición (loop invisible).
-  const onEnd = (e) => {
-    if (e.target !== e.currentTarget) return; // ignorar el zoom hover de las <img>
-    if (i >= n) { setAnimate(false); setI(0); }
-  };
-  useEffect(() => {
-    if (!animate) {
-      const r = requestAnimationFrame(() => requestAnimationFrame(() => setAnimate(true)));
-      return () => cancelAnimationFrame(r);
-    }
-  }, [animate]);
-  const active = n > 1 ? i % n : 0;
-  return (
-    <div className="cj-herosplit-slides">
-      <div className="cj-hero-track" onTransitionEnd={onEnd}
-        style={{ transform: `translateX(-${i * 100}%)`, transition: animate ? 'transform 0.9s cubic-bezier(.65,0,.35,1)' : 'none' }}>
-        {slides.map((src, k) => <img key={k} className="cj-hero-slide" src={src} alt="" aria-hidden="true" draggable="false" />)}
-      </div>
-      {n > 1 ? (
-        <div className="cj-hero-dots" aria-hidden="true">
-          {imgs.map((_, k) => <span key={k} className={'cj-hero-dot' + (k === active ? ' is-active' : '')} />)}
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
+   Hero estático: cada bloque = una foto fija + texto. (El slider quedó descartado acá;
+   la idea del carrusel se retomará como slider de MOBILE en otra sección — pendiente.
+   El código del carrusel está en el historial de git si hace falta recuperarlo.) */
 function HeroSplit() {
   const panels = [
-    { label: 'Proyectos', href: '#proyectos', imgs: [PHOTO.hero2, PHOTO.shelf, PHOTO.shelf2, PHOTO.kitchen], tag: 'Interiorismo · Dirección creativa', line: 'Espacios diseñados de principio a fin, con una mirada integral.', offset: 0 },
-    { label: 'Tienda', href: '#tienda', imgs: [PHOTO.lamps, PHOTO.heroLamp, PHOTO.nook, PHOTO.wood], tag: 'Mobiliario · Iluminación · Objetos', line: 'Mobiliario, iluminación y objetos con la firma del estudio.', offset: 1500 },
+    { label: 'Proyectos', href: '#proyectos', img: PHOTO.hero2, tag: 'Interiorismo · Dirección creativa', line: 'Espacios diseñados de principio a fin, con una mirada integral.' },
+    { label: 'Tienda', href: '#tienda', img: PHOTO.lamps, tag: 'Mobiliario · Iluminación · Objetos', line: 'Mobiliario, iluminación y objetos con la firma del estudio.' },
   ];
   return (
     <section id="top" className="cj-herosplit">
       {panels.map((p) => (
         <a key={p.label} className="cj-herosplit-panel" href={p.href} aria-label={p.label}>
-          <HeroSlider imgs={p.imgs} offset={p.offset} />
+          <img className="cj-herosplit-bg" src={p.img} alt={p.label} />
           <div className="cj-herosplit-scrim" />
           <div className="cj-herosplit-inner">
             <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>{p.tag}</div>
