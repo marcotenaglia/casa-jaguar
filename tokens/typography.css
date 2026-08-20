@@ -16,11 +16,16 @@
   --cj-font-ui: var(--cj-font);        /* nav, buttons, meta */
   --cj-font-body: var(--cj-font);      /* running paragraphs */
 
-  /* weights — Roboto: light / regular / medium / bold */
+  /* weights — Rubik: light / regular / medium / semibold / bold / extrabold / black.
+     Todos están cargados en tokens/fonts.css (si falta un peso, el navegador redondea
+     al más cercano y "no cambia" respecto de otro). */
   --cj-w-light: 300; /* @kind font */
   --cj-w-regular: 400; /* @kind font */
   --cj-w-medium: 500; /* @kind font */
+  --cj-w-semibold: 600; /* @kind font */
   --cj-w-bold: 700; /* @kind font */
+  --cj-w-extrabold: 800; /* @kind font */
+  --cj-w-black: 900; /* @kind font */
 
   /* type scale — editorial, generous */
   --cj-t-eyebrow: 0.75rem;    /* 12px letterspaced caps */
