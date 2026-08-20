@@ -33,18 +33,21 @@
   .cj-herosplit-panel{position:relative;overflow:hidden;display:flex;align-items:flex-end;min-height:56vh;color:var(--cj-paper);text-decoration:none}
   .cj-herosplit-panel:first-child{border-right:1px solid rgba(243,239,230,0.16)}
   /* Slider del home — carrusel horizontal con autoplay + infinite loop (bloque de 4
-     imágenes, ~3s c/u). El texto queda fijo; solo se desliza la banda de fotos. */
+     imágenes). Cambio lento y suave; el texto queda fijo y solo se desliza la banda de
+     fotos. En vez de puntos, muestra el NOMBRE del contenido que se está viendo. */
   .cj-herosplit-slides{position:absolute;inset:0;overflow:hidden}
   .cj-hero-track{display:flex;height:100%;width:100%;will-change:transform}
   .cj-hero-slide{flex:0 0 100%;width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform 1.3s cubic-bezier(.2,.6,.2,1);user-select:none;-webkit-user-drag:none}
   .cj-herosplit-panel:hover .cj-hero-slide{transform:scale(1.06)}
-  .cj-hero-dots{position:absolute;z-index:2;right:clamp(1.1rem,3vw,2.2rem);bottom:clamp(1.1rem,3vw,1.9rem);display:flex;gap:9px}
-  .cj-hero-dot{width:7px;height:7px;border-radius:50%;background:rgba(243,239,230,0.42);transition:background var(--cj-dur) var(--cj-ease),transform var(--cj-dur) var(--cj-ease)}
-  .cj-hero-dot.is-active{background:var(--cj-paper);transform:scale(1.3)}
+  .cj-hero-caption{position:absolute;z-index:2;right:clamp(1.1rem,3vw,2.2rem);bottom:clamp(1.1rem,3vw,1.9rem);max-width:70%;text-align:right;pointer-events:none}
+  .cj-hero-caption-name{display:inline-block;font-family:var(--cj-font-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--cj-paper);text-shadow:0 1px 12px rgba(0,0,0,0.55);animation:cjCaptionIn .6s cubic-bezier(.2,.6,.2,1)}
+  @keyframes cjCaptionIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .cj-herosplit-panel:hover,.cj-herosplit-panel:hover .cj-herosplit-title,.cj-herosplit-panel:hover .cj-cta-label{color:var(--cj-paper) !important}
   /* Scrim del hero — oscuridad justa para legibilidad, CONSTANTE (no cambia en hover) */
   .cj-herosplit-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,24,21,0.5) 0%,rgba(28,24,21,0.22) 52%,rgba(28,24,21,0.28) 100%)}
   .cj-herosplit-inner{position:relative;padding:clamp(2rem,5vw,4rem);max-width:44ch}
+  /* Eyebrow del hero en una sola línea (menos tracking + sin salto) */
+  .cj-herosplit-inner .cj-eyebrow{letter-spacing:0.16em;white-space:nowrap}
   .cj-herosplit-title{margin:.6rem 0 0;font-family:var(--cj-font-display);font-weight:var(--cj-w-bold);font-size:clamp(2.6rem,5.2vw,4.2rem);line-height:1;letter-spacing:-0.01em}
   .cj-herosplit-line{margin:1rem 0 0;font-weight:var(--cj-w-regular);font-size:var(--cj-t-body-lg);line-height:1.42;color:rgba(243,239,230,0.82)}
   .cj-herosplit-cta{display:inline-flex;align-items:center;gap:10px;margin-top:1.6rem;font-family:var(--cj-font-ui);font-size:13px;letter-spacing:0.16em;text-transform:uppercase}

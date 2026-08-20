@@ -122,20 +122,22 @@ function Nav() {
 }
 
 /* ———————————————————— HERO — Pantalla 1: dos bloques (Proyectos / Tienda), apilados en mobile ————————————————————
-   Cada bloque es un SLIDER: carrusel horizontal con autoplay (~3s) e infinite loop
-   (clona la 1ª foto al final y salta sin transición → loop sin corte). Los textos y el
-   CTA quedan FIJOS; solo se desliza la banda de fotos. Puntos indicadores para que se
-   lea claramente como slider (sobre todo en mobile). Respeta prefers-reduced-motion. */
-function HeroSlider({ imgs, offset = 0 }) {
-  const n = imgs.length;
-  const slides = React.useMemo(() => (n > 1 ? imgs.concat(imgs[0]) : imgs), [imgs]);
+   Cada bloque es un SLIDER: carrusel horizontal con autoplay e infinite loop (clona la
+   1ª foto al final y salta sin transición → loop sin corte). Cambio LENTO y suave
+   (intervalo 5s, transición 1.15s). Los textos y el CTA quedan FIJOS; solo se desliza la
+   banda de fotos. En vez de puntos, se muestra el NOMBRE del contenido visible.
+   Respeta prefers-reduced-motion.
+   Cada slide = { src, name }. El `name` es placeholder editable (destino: WordPress). */
+function HeroSlider({ slides, offset = 0 }) {
+  const n = slides.length;
+  const frames = React.useMemo(() => (n > 1 ? slides.concat(slides[0]) : slides), [slides]);
   const [i, setI] = useState(0);
   const [animate, setAnimate] = useState(true);
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce || n < 2) return;
     let interval;
-    const startTO = setTimeout(() => { interval = setInterval(() => setI((v) => v + 1), 3000); }, offset);
+    const startTO = setTimeout(() => { interval = setInterval(() => setI((v) => v + 1), 5000); }, offset);
     return () => { clearTimeout(startTO); if (interval) clearInterval(interval); };
   }, [n, offset]);
   // Al llegar al clon (i === n), reponer al 0 real SIN transición (loop invisible).
@@ -153,12 +155,12 @@ function HeroSlider({ imgs, offset = 0 }) {
   return (
     <div className="cj-herosplit-slides">
       <div className="cj-hero-track" onTransitionEnd={onEnd}
-        style={{ transform: `translateX(-${i * 100}%)`, transition: animate ? 'transform 0.9s cubic-bezier(.65,0,.35,1)' : 'none' }}>
-        {slides.map((src, k) => <img key={k} className="cj-hero-slide" src={src} alt="" aria-hidden="true" draggable="false" />)}
+        style={{ transform: `translateX(-${i * 100}%)`, transition: animate ? 'transform 1.15s cubic-bezier(.45,.05,.25,1)' : 'none' }}>
+        {frames.map((s, k) => <img key={k} className="cj-hero-slide" src={s.src} alt="" aria-hidden="true" draggable="false" />)}
       </div>
       {n > 1 ? (
-        <div className="cj-hero-dots" aria-hidden="true">
-          {imgs.map((_, k) => <span key={k} className={'cj-hero-dot' + (k === active ? ' is-active' : '')} />)}
+        <div className="cj-hero-caption" aria-hidden="true">
+          <span key={active} className="cj-hero-caption-name">{slides[active].name}</span>
         </div>
       ) : null}
     </div>
@@ -167,14 +169,32 @@ function HeroSlider({ imgs, offset = 0 }) {
 
 function HeroSplit() {
   const panels = [
-    { label: 'Proyectos', href: '#proyectos', imgs: [PHOTO.hero2, PHOTO.shelf, PHOTO.shelf2, PHOTO.kitchen], tag: 'Interiorismo · Dirección creativa', line: 'Espacios diseñados de principio a fin, con una mirada integral.', offset: 0 },
-    { label: 'Tienda', href: '#tienda', imgs: [PHOTO.lamps, PHOTO.heroLamp, PHOTO.nook, PHOTO.wood], tag: 'Mobiliario · Iluminación · Objetos', line: 'Mobiliario, iluminación y objetos con la firma del estudio.', offset: 1500 },
+    {
+      label: 'Proyectos', href: '#proyectos', tag: 'Interiorismo · Dirección creativa',
+      line: 'Espacios diseñados de principio a fin, con una mirada integral.', offset: 0,
+      slides: [
+        { src: PHOTO.hero2, name: 'Estudio' },
+        { src: PHOTO.shelf, name: 'Comedor' },
+        { src: PHOTO.shelf2, name: 'Living' },
+        { src: PHOTO.kitchen, name: 'Cocina' },
+      ],
+    },
+    {
+      label: 'Tienda', href: '#tienda', tag: 'Mobiliario · Iluminación · Objetos',
+      line: 'Mobiliario, iluminación y objetos con la firma del estudio.', offset: 2500,
+      slides: [
+        { src: PHOTO.lamps, name: 'Iluminación' },
+        { src: PHOTO.heroLamp, name: 'Veladores' },
+        { src: PHOTO.nook, name: 'Camastros' },
+        { src: PHOTO.wood, name: 'Mesas' },
+      ],
+    },
   ];
   return (
     <section id="top" className="cj-herosplit">
       {panels.map((p) => (
         <a key={p.label} className="cj-herosplit-panel" href={p.href} aria-label={p.label}>
-          <HeroSlider imgs={p.imgs} offset={p.offset} />
+          <HeroSlider slides={p.slides} offset={p.offset} />
           <div className="cj-herosplit-scrim" />
           <div className="cj-herosplit-inner">
             <div className="cj-eyebrow" style={{ color: 'rgba(243,239,230,0.82)' }}>{p.tag}</div>
