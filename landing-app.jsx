@@ -137,8 +137,13 @@ function HeroSlider({ slides, offset = 0 }) {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce || n < 2) return;
     let interval;
-    const startTO = setTimeout(() => { interval = setInterval(() => setI((v) => v + 1), 5000); }, offset);
-    return () => { clearTimeout(startTO); if (interval) clearInterval(interval); };
+    // El PRIMER cambio ocurre pronto (no hay que esperar los 5s del arranque); luego
+    // sigue con la cadencia normal. `offset` desincroniza los dos paneles.
+    const firstTO = setTimeout(() => {
+      setI((v) => v + 1);
+      interval = setInterval(() => setI((v) => v + 1), 5000);
+    }, 1600 + offset);
+    return () => { clearTimeout(firstTO); if (interval) clearInterval(interval); };
   }, [n, offset]);
   // Al llegar al clon (i === n), reponer al 0 real SIN transición (loop invisible).
   const onEnd = (e) => {
@@ -185,7 +190,7 @@ function HeroSplit() {
     },
     {
       label: 'Tienda', href: '#tienda', tag: 'Mobiliario · Iluminación · Objetos',
-      line: 'Mobiliario, iluminación y objetos con la firma del estudio.', offset: 2500,
+      line: 'Mobiliario, iluminación y objetos con la firma del estudio.', offset: 900,
       slides: shopSlides,
     },
   ];
