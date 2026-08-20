@@ -156,11 +156,15 @@ function HeroSlider({ slides, offset = 0 }) {
     <div className="cj-herosplit-slides">
       <div className="cj-hero-track" onTransitionEnd={onEnd}
         style={{ transform: `translateX(-${i * 100}%)`, transition: animate ? 'transform 1.15s cubic-bezier(.45,.05,.25,1)' : 'none' }}>
-        {frames.map((s, k) => <img key={k} className="cj-hero-slide" src={s.src} alt="" aria-hidden="true" draggable="false" />)}
+        {frames.map((s, k) => (
+          <div key={k} className="cj-hero-slide">
+            <img className="cj-hero-img" src={s.src} alt="" aria-hidden="true" draggable="false" />
+          </div>
+        ))}
       </div>
       {n > 1 ? (
         <div className="cj-hero-caption" aria-hidden="true">
-          <span key={active} className="cj-hero-caption-name">{slides[active].name}</span>
+          <span key={slides[active].name} className="cj-hero-caption-name">{slides[active].name}</span>
         </div>
       ) : null}
     </div>
@@ -168,26 +172,21 @@ function HeroSlider({ slides, offset = 0 }) {
 }
 
 function HeroSplit() {
+  // Slides DERIVADOS de los datos reales (así el hero se actualiza solo desde WordPress):
+  //  · Proyectos → fotos de cada obra (OBRAS), con el nombre del proyecto de caption.
+  //  · Tienda   → foto de cada categoría/ítem (CATEGORIES), con su nombre de caption.
+  const projectSlides = OBRAS.flatMap((o) => o.images.slice(0, 2).map((src) => ({ src, name: o.title })));
+  const shopSlides = CATEGORIES.slice(0, 4).map((c) => ({ src: c.img, name: c.name }));
   const panels = [
     {
       label: 'Proyectos', href: '#proyectos', tag: 'Interiorismo · Dirección creativa',
       line: 'Espacios diseñados de principio a fin, con una mirada integral.', offset: 0,
-      slides: [
-        { src: PHOTO.hero2, name: 'Estudio' },
-        { src: PHOTO.shelf, name: 'Comedor' },
-        { src: PHOTO.shelf2, name: 'Living' },
-        { src: PHOTO.kitchen, name: 'Cocina' },
-      ],
+      slides: projectSlides,
     },
     {
       label: 'Tienda', href: '#tienda', tag: 'Mobiliario · Iluminación · Objetos',
       line: 'Mobiliario, iluminación y objetos con la firma del estudio.', offset: 2500,
-      slides: [
-        { src: PHOTO.lamps, name: 'Iluminación' },
-        { src: PHOTO.heroLamp, name: 'Veladores' },
-        { src: PHOTO.nook, name: 'Camastros' },
-        { src: PHOTO.wood, name: 'Mesas' },
-      ],
+      slides: shopSlides,
     },
   ];
   return (
